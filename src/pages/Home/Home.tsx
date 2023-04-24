@@ -44,7 +44,9 @@ export default function Home() {
         </Typography>
       </div>
       <Button variant="filled">Button</Button>
-      <Input />
+      <Input placeholder="Input" />
+      <Input label="Label" placeholder="Labeled Input" />
+      <Input searchIcon label="Search icon" placeholder="Search icon" />
     </div>
   )
 }

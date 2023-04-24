@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 
 import Home from "./pages/Home/Home"
-import { NotFound } from "./pages/NotFound/NotFound"
 import { Layout } from "./layout"
 
 export default function App() {
@@ -12,7 +11,7 @@ export default function App() {
         <Route path="/chat" element={<Home />} />
         <Route path="/profile" element={<Home />} />
         <Route path="/info" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Home />} />
       </Route>
     </Routes>
   )
