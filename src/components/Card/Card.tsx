@@ -15,10 +15,14 @@ interface CardProps {
 export function Card({ image, info, action }: CardProps) {
   return (
     <CardContext.Provider value={{ inCard: true }}>
-      <div className="flex min-w-[272px] flex-col shadow-md rounded-lg p-4">
+      <div className="flex min-w-[272px] flex-col shadow-md rounded-lg">
         {image}
-        <div className="space-y-1 font-nunito">{info}</div>
-        <div className="flex justify-between gap-4 mt-4">{action}</div>
+        <div className="p-4">
+          <div className="space-y-1 font-nunito">{info}</div>
+          {action && (
+            <div className="flex justify-between gap-4 mt-4">{action}</div>
+          )}
+        </div>
       </div>
     </CardContext.Provider>
   )
