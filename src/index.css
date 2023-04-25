@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  width: 100%;
+  cursor: inherit;
+}

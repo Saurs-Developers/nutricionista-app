@@ -44,7 +44,9 @@ export function Typography({
       : bodyVariants[variant as BodyVariants]
 
   return (
-    <Component className={`font-nunito ${className} ${variantClass}`}>
+    <Component
+      className={`font-nunito ${className && className} ${variantClass}`}
+    >
       {children}
     </Component>
   )
