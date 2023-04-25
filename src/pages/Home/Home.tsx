@@ -1,10 +1,14 @@
-import { FilePdf, MagnifyingGlass } from "phosphor-react"
+import { useState } from "react"
+import { FilePdf } from "phosphor-react"
 
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
+import { ProgressBar } from "../../components/ProgressBar/ProgressBar"
 import { Typography } from "../../components/Typography"
 
 export default function Home() {
+  const [value, setValue] = useState(0)
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-4">
@@ -52,6 +56,13 @@ export default function Home() {
       <Input placeholder="Input" />
       <Input label="Label" placeholder="Labeled Input" />
       <Input searchIcon label="Search icon" placeholder="Search icon" />
+      <div>Valor da barra</div>
+      <input
+        type="number"
+        onChange={(e) => setValue(Number(e.target.value))}
+        className="border-2 border-brand-primary p-2 rounded-md"
+      />
+      <ProgressBar value={value} />
     </div>
   )
 }
