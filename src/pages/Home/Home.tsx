@@ -1,3 +1,5 @@
+import { FilePdf, MagnifyingGlass } from "phosphor-react"
+
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { Typography } from "../../components/Typography"
@@ -44,6 +46,9 @@ export default function Home() {
         </Typography>
       </div>
       <Button variant="filled">Button</Button>
+      <Button variant="filled">
+        Fazer download <FilePdf size={24} />
+      </Button>
       <Input placeholder="Input" />
       <Input label="Label" placeholder="Labeled Input" />
       <Input searchIcon label="Search icon" placeholder="Search icon" />

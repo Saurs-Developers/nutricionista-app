@@ -18,22 +18,15 @@ export function Input({ placeholder, id, label, searchIcon }: InputProps) {
           {label}
         </label>
       )}
-      <div className="relative w-full">
-        <input
-          id={id}
-          placeholder={placeholder}
-          className={`border-2 border-neutral-400 w-full rounded-md h-12 p-4 outline-none focus:border-brand-primary transition text-neutral-700${
-            searchIcon && "max-w-[100px]"
-          }`}
-          type="text"
-        />
-        <div className="absolute top-1/2 -translate-y-1/2 right-0 rounded-md h-full w-[15%] flex items-center justify-center">
+      <div className="flex items-center justify-between gap-2 border-2 h-12 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
+        <input placeholder={placeholder} className="flex-1 outline-none" />
+        {searchIcon && (
           <MagnifyingGlass
-            size={20}
             className="text-brand-primary"
+            size={20}
             weight="bold"
           />
-        </div>
+        )}
       </div>
     </div>
   )
