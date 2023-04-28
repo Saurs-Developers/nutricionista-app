@@ -1,7 +1,5 @@
 import * as Progress from "@radix-ui/react-progress"
 
-import "./styles.css"
-
 interface ProgressBarProps {
   value: number
 }

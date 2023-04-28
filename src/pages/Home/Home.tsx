@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { FilePdf } from "phosphor-react"
 
+import { AlertDialog } from "../../components/AlertDialog"
 import { Button } from "../../components/Button"
 import { Card } from "../../components/Card/Card"
+import { Dialog } from "../../components/Dialog"
 import { Input } from "../../components/Input"
-import { ProgressBar } from "../../components/ProgressBar/ProgressBar"
+import { ProgressBar } from "../../components/ProgressBar"
 import { Select } from "../../components/Select"
 import { Typography } from "../../components/Typography"
 
@@ -132,11 +134,21 @@ export default function Home() {
         }
         action={
           <>
-            <Button variant="outlined">Excluir</Button>
-            <Button variant="danger">Editar</Button>
+            <Button variant="danger-outlined">Excluir</Button>
+            <Button variant="outlined">Editar</Button>
           </>
         }
       />
+      <Dialog trigger="Dialog" close="Fechar">
+        <Typography variant="sm" type="heading" className="text-brand-primary">
+          Dialog
+        </Typography>
+      </Dialog>
+      <AlertDialog trigger="Alert dialog" cancel="Cancelar" action="Ação">
+        <Typography variant="sm" type="heading" className="text-brand-primary">
+          Alert Dialog
+        </Typography>
+      </AlertDialog>
     </div>
   )
 }

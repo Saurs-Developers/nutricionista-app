@@ -20,7 +20,7 @@ export function Select({ id, label, options }: SelectProps) {
           id={id}
           className="border-2 outline-none border-neutral-400 text-neutral-600 rounded-lg focus:border-brand-primary block w-full h-12 px-4"
         >
-          <option hidden selected>
+          <option hidden defaultChecked>
             Selecionar
           </option>
           {options}
