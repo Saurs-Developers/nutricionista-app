@@ -1,6 +1,3 @@
-import { useState } from "react"
-import { FilePdf } from "phosphor-react"
-
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { Dialog } from "@/components/Dialog"
@@ -16,7 +13,7 @@ export default function Home() {
           Olá, Jefté
         </Typography>
       </header>
-      <div className="mt-8 space-y-4">
+      <div className="mt-5 space-y-4">
         <section className="flex flex-col">
           <header>
             <Typography
