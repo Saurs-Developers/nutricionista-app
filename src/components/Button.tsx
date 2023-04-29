@@ -16,7 +16,7 @@ const buttonVariants = {
 }
 
 const baseStyles =
-  "flex items-center gap-2 justify-center font-nunito rounded-md h-10 w-full px-4 focus:ring focus:ring-2 focus:ring-offset-2 transition outline-none"
+  "flex items-center gap-2 justify-center font-nunito rounded-md h-10 w-full px-2 focus:ring focus:ring-2 focus:ring-offset-2 transition outline-none"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "filled" | "outlined" | "danger" | "danger-outlined"
@@ -34,7 +34,9 @@ const ButtonComponent: ForwardRefRenderFunction<ButtonRef, ButtonProps> = (
     <button
       {...props}
       ref={ref}
-      className={`${baseStyles} ${buttonVariants[variant!]} ${className}`}
+      className={`${baseStyles} ${buttonVariants[variant!]} ${
+        className && className
+      }`}
     >
       {children}
     </button>

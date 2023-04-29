@@ -15,7 +15,7 @@ interface CardProps {
 export function Card({ image, info, action }: CardProps) {
   return (
     <CardContext.Provider value={{ inCard: true }}>
-      <div className="flex min-w-[272px] flex-col shadow-md rounded-lg">
+      <div className="flex min-w-[242px] flex-col border-2 rounded-lg">
         {image}
         <div className="p-4">
           <div className="space-y-1 font-nunito">{info}</div>
