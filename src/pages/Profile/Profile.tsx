@@ -4,10 +4,7 @@ import { Button } from "@/components/Button"
 import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
 
-const options = [
-  "Acompanhamento 1 - 21/03 -  21/05",
-  "Acompanhamento 2 - 21/05 -  21/07",
-]
+const options = ["21/03 -  21/05", "21/05 -  21/07"]
 
 export default function Profile() {
   return (
@@ -45,13 +42,13 @@ export default function Profile() {
             </Typography>
           </div>
         </section>
-        <Typography className="text-neutral-700" variant="xxs" type="heading">
-          Objetivo: Ganhar massa e perder gordura
-        </Typography>
       </div>
-      <div className="mt-6">
+      <div className="my-6 space-y-4">
         <Typography className="text-neutral-700" type="body" variant="xl">
           Avaliação antropométrica
+        </Typography>
+        <Typography className="text-neutral-700" variant="xxs" type="heading">
+          Objetivo: Ganhar massa e perder gordura
         </Typography>
         <Select
           options={options.map((option, i) => {
@@ -59,7 +56,7 @@ export default function Profile() {
           })}
           label="Período"
         />
-        <Button className="mt-4" variant="filled">
+        <Button variant="filled">
           Exportar em PDF <FilePdf size={24} />
         </Button>
         <Typography className="text-neutral-600 mt-6" type="body" variant="md">

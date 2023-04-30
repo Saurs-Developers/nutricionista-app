@@ -58,7 +58,7 @@ export function Layout() {
             </Typography>
           </CustomLink>
           <CustomLink
-            to="info"
+            to="faq"
             base="flex flex-col gap-2 items-center px-4 transition"
             active="text-brand-primary"
           >
@@ -69,7 +69,7 @@ export function Layout() {
               variant="xs"
               as="span"
             >
-              Info
+              FAQ
             </Typography>
           </CustomLink>
         </nav>
