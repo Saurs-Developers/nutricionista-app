@@ -73,7 +73,7 @@ export function Home() {
             </Typography>
           </header>
           <div className="flex gap-4 overflow-auto mt-2 mb-4">
-            <Link to="/recipes">
+            <Link to="/diet">
               <Card
                 info={
                   <>
@@ -83,7 +83,7 @@ export function Home() {
                 }
               />
             </Link>
-            <Link to="/recipes">
+            <Link to="/diet">
               <Card
                 info={
                   <>
