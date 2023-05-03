@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { ArrowRight } from "phosphor-react"
 
 import { Typography } from "@/components/Typography"
@@ -28,7 +29,9 @@ export function Faq() {
               <Typography className="text-neutral-700" type="body" variant="sm">
                 {question}
               </Typography>
-              <ArrowRight className="text-brand-primary" size={24} />
+              <Link to="/question">
+                <ArrowRight className="text-brand-primary" size={24} />
+              </Link>
             </div>
           )
         })}

@@ -6,7 +6,7 @@ import { Typography } from "@/components/Typography"
 
 const options = ["21/03 -  21/05", "21/05 -  21/07"]
 
-export default function Profile() {
+export function Profile() {
   return (
     <div>
       <header>

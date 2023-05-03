@@ -14,7 +14,7 @@ export function Diet() {
         </button>
         <Input placeholder="Pesquisar" searchIcon />
       </header>
-      <Typography className="my-8" type="heading" variant="xs">
+      <Typography className="my-6" type="heading" variant="xs">
         Dieta - A (Dias de treino)
       </Typography>
       <Button variant="filled">Acesasr minhas receitas</Button>

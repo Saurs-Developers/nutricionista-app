@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom"
 import { ArrowLeft } from "phosphor-react"
 
 import { Typography } from "@/components/Typography"
 
 export function Question() {
+  const navigate = useNavigate()
+
   return (
     <div>
       <header className="flex items-center gap-4">
-        <button>
+        <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
         <Typography className="text-neutral-700" variant="xs" type="heading">

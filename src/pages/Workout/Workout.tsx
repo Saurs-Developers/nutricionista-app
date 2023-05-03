@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { ArrowLeft, CaretLeft } from "phosphor-react"
 
 import { Button } from "@/components/Button"
@@ -6,15 +7,17 @@ import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 
 export function Workout() {
+  const navigate = useNavigate()
+
   return (
     <div>
       <header className="flex items-center gap-4">
-        <button>
+        <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
         <Input placeholder="Pesquisar" searchIcon />
       </header>
-      <Typography className="my-8" type="heading" variant="xs">
+      <Typography className="my-6" type="heading" variant="xs">
         Treino A Quadríceps
       </Typography>
       <div className="flex flex-col gap-6">
