@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { ArrowLeft } from "phosphor-react"
 
 import { Button } from "@/components/Button"
@@ -6,10 +7,12 @@ import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 
 export function Diet() {
+  const { navigate } = useNavigate()
+
   return (
     <div>
       <header className="flex items-center gap-4">
-        <button>
+        <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
         <Input placeholder="Pesquisar" searchIcon />
