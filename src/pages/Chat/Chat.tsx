@@ -2,7 +2,7 @@ import { Typography } from "@/components/Typography"
 
 export function Chat() {
   return (
-    <Typography variant="lg" type="heading">
+    <Typography variant="sm" type="heading">
       Em breve
     </Typography>
   )
