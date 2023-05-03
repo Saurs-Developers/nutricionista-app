@@ -63,13 +63,7 @@ export default function Profile() {
           Fim do acompanhamento atual: 21/05
         </Typography>
       </div>
-      <img
-        className="m-auto mt-4"
-        width={224}
-        height={224}
-        src="athletics.png"
-        alt=""
-      />
+      <img className="w-56 m-auto mt-4" src="athletics.png" alt="" />
     </div>
   )
 }
