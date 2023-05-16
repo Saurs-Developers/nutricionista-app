@@ -26,40 +26,46 @@ export function Home() {
               Meus treinos
             </Typography>
           </header>
-          <div className="flex gap-4 overflow-auto mt-2">
-            <Link to="/workout">
-              <Card
-                info={
-                  <>
-                    <Card.Title>Treino A Quadriceps</Card.Title>
-                    <Card.Subtitle>Segunda-feira</Card.Subtitle>
-                  </>
-                }
-                image={<Card.Image src="http://placekitten.com/400/400" />}
-              />
-            </Link>
-            <Link to="/workout">
-              <Card
-                info={
-                  <>
-                    <Card.Title>Treino B Peito</Card.Title>
-                    <Card.Subtitle>Terça-feira</Card.Subtitle>
-                  </>
-                }
-                image={<Card.Image src="http://placekitten.com/400/400" />}
-              />
-            </Link>
-            <Link to="/workout">
-              <Card
-                info={
-                  <>
-                    <Card.Title>Treino C Costas</Card.Title>
-                    <Card.Subtitle>Quarta-feira</Card.Subtitle>
-                  </>
-                }
-                image={<Card.Image src="http://placekitten.com/400/400" />}
-              />
-            </Link>
+          <div className="snap-x snap-mandatory flex gap-4 overflow-auto mt-2">
+            <div className="snap-start snap-always">
+              <Link to="/workout">
+                <Card
+                  info={
+                    <>
+                      <Card.Title>Treino A Quadriceps</Card.Title>
+                      <Card.Subtitle>Segunda-feira</Card.Subtitle>
+                    </>
+                  }
+                  image={<Card.Image src="http://placekitten.com/400/400" />}
+                />
+              </Link>
+            </div>
+            <div className="snap-start snap-always">
+              <Link to="/workout">
+                <Card
+                  info={
+                    <>
+                      <Card.Title>Treino B Peito</Card.Title>
+                      <Card.Subtitle>Terça-feira</Card.Subtitle>
+                    </>
+                  }
+                  image={<Card.Image src="http://placekitten.com/400/400" />}
+                />
+              </Link>
+            </div>
+            <div className="snap-start snap-always">
+              <Link to="/workout">
+                <Card
+                  info={
+                    <>
+                      <Card.Title>Treino C Costas</Card.Title>
+                      <Card.Subtitle>Quarta-feira</Card.Subtitle>
+                    </>
+                  }
+                  image={<Card.Image src="http://placekitten.com/400/400" />}
+                />
+              </Link>
+            </div>
           </div>
         </section>
         <section>
@@ -72,27 +78,31 @@ export function Home() {
               Minhas dietas
             </Typography>
           </header>
-          <div className="flex gap-4 overflow-auto mt-2 mb-4">
-            <Link to="/diet">
-              <Card
-                info={
-                  <>
-                    <Card.Title>Dieta A</Card.Title>
-                    <Card.Subtitle>Dias de treino</Card.Subtitle>
-                  </>
-                }
-              />
-            </Link>
-            <Link to="/diet">
-              <Card
-                info={
-                  <>
-                    <Card.Title>Dieta B</Card.Title>
-                    <Card.Subtitle>Dias sem treino</Card.Subtitle>
-                  </>
-                }
-              />
-            </Link>
+          <div className="snap-x snap-mandatory flex gap-4 overflow-auto mt-2 mb-4">
+            <div className="snap-start snap-always">
+              <Link to="/diet">
+                <Card
+                  info={
+                    <>
+                      <Card.Title>Dieta A</Card.Title>
+                      <Card.Subtitle>Dias de treino</Card.Subtitle>
+                    </>
+                  }
+                />
+              </Link>
+            </div>
+            <div className="snap-start snap-always">
+              <Link to="/diet">
+                <Card
+                  info={
+                    <>
+                      <Card.Title>Dieta B</Card.Title>
+                      <Card.Subtitle>Dias sem treino</Card.Subtitle>
+                    </>
+                  }
+                />
+              </Link>
+            </div>
           </div>
           <Link to="/recipes">
             <Button variant="filled">Acessar minhas receitas</Button>

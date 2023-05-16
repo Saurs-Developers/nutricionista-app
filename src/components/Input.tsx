@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, HTMLAttributes } from "react"
+import { forwardRef, ForwardRefRenderFunction, HTMLAttributes } from "react"
 import { MagnifyingGlass } from "phosphor-react"
 
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
@@ -10,7 +10,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
 
 export type InputRef = HTMLInputElement
 
-export const InputComponent: ForwardRefRenderFunction<InputRef, InputProps> = (
+const InputComponent: ForwardRefRenderFunction<InputRef, InputProps> = (
   { placeholder, id, label, searchIcon }: InputProps,
   ref,
 ) => {
@@ -41,3 +41,5 @@ export const InputComponent: ForwardRefRenderFunction<InputRef, InputProps> = (
     </div>
   )
 }
+
+export const Input = forwardRef(InputComponent)

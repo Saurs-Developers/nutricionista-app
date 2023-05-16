@@ -7,7 +7,7 @@ import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 
 export function Diet() {
-  const { navigate } = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <div>
