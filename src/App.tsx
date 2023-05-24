@@ -1,35 +1,23 @@
-import { Route } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { Chat } from "./pages/Chat"
-import { Diet } from "./pages/Diet"
-import { Faq } from "./pages/Faq"
-import { FirstAccess } from "./pages/FirstAccess"
-import { Home } from "./pages/Home"
-import { Login } from "./pages/Login"
-import { Profile } from "./pages/Profile"
-import { Question } from "./pages/Question"
-import { Recipes } from "./pages/Recipes"
-import { ResetPassword } from "./pages/ResetPassword"
-import { Workout } from "./pages/Workout"
-import { Layout } from "./layout"
+import { routesConfig } from "./utils/routes"
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+})
+
+const router = createBrowserRouter(routesConfig)
 
 export default function App() {
   return (
-    <>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/workout" element={<Workout />} />
-        <Route path="/diet" element={<Diet />} />
-        <Route path="/question" element={<Question />} />
-        <Route path="/recipes" element={<Recipes />} />
-        <Route path="*" element={<Home />} />
-      </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/first-access" element={<FirstAccess />} />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   )
 }

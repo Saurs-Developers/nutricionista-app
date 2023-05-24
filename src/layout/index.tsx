@@ -13,7 +13,7 @@ export function Layout() {
       <footer className="border-t-2 border-brand-primary">
         <nav className="flex items-center justify-between p-2 text-neutral-600">
           <CustomLink
-            to="/"
+            to="/home"
             base="flex flex-col gap-2 items-center px-4 transition"
             active="text-brand-primary"
           >

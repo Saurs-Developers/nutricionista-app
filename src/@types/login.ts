@@ -6,3 +6,7 @@ export interface LoginBody {
 export interface ResetPasswordBody {
   password: string
 }
+
+export interface FirstAccessBody {
+  password: string
+}

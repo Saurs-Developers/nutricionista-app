@@ -58,7 +58,7 @@ export function Login() {
         />
         <Input
           label="Senha"
-          {...(register("password"), { type: "password" })}
+          {...register("password")}
           error={errors.password?.message as string}
           placeholder="********"
         />
@@ -68,7 +68,7 @@ export function Login() {
         {isError && (
           <span className="text-red-500">Falha ao efetuar o login!</span>
         )}
-        <Link className="self-end underline" to="/reset-password">
+        <Link className="self-end underline" to="/reset-password-email">
           <Typography as="span" variant="md" type="body">
             Esqueceu sua senha?
           </Typography>
