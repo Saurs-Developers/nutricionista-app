@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import jwt_decode from "jwt-decode"
 import { ArrowLeft } from "phosphor-react"
 import * as z from "zod"
 
+import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
@@ -13,6 +16,16 @@ export type SendEmailProps = z.infer<typeof sendEmailSchema>
 
 export function ResetPasswordEmail() {
   const navigate = useNavigate()
+
+  const {
+    mutate: sendEmail,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useMutation({
+    mutationFn: (data: SendEmailProps) =>
+      apiPrivate.post("/v1/users/forgot-password", data),
+  })
 
   const [isEmailSent, setIsEmailSent] = useState(false)
 
@@ -26,9 +39,16 @@ export function ResetPasswordEmail() {
   })
 
   const onSubmit = async (formData: SendEmailProps) => {
-    setIsEmailSent(true)
-    console.log(formData)
+    sendEmail(formData)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsEmailSent(true)
+    } else if (isError) {
+      setIsEmailSent(false)
+    }
+  }, [isSuccess, isError])
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
@@ -65,6 +85,9 @@ export function ResetPasswordEmail() {
             />
             <Button variant="filled">Enviar e-mail</Button>
           </>
+        )}
+        {isError && (
+          <span className="text-red-500">Falha ao enviar o e-mail</span>
         )}
       </form>
     </div>

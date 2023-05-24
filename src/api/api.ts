@@ -2,6 +2,14 @@ import axios from "axios"
 
 const baseURL = "https://nutricionista-api-dev.up.railway.app/api"
 
+export const apiPrivate = axios.create({
+  baseURL: baseURL,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+})
+
 export const api = axios.create({
   baseURL: baseURL,
   headers: {
@@ -10,7 +18,7 @@ export const api = axios.create({
   },
 })
 
-api.interceptors.request.use(
+apiPrivate.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access-token")
 
@@ -24,7 +32,7 @@ api.interceptors.request.use(
   },
 )
 
-api.interceptors.response.use(
+apiPrivate.interceptors.response.use(
   (res) => {
     return res
   },
@@ -34,9 +42,8 @@ api.interceptors.response.use(
 
     if (originalConfig.url !== `${baseURL}v1/login` && error.response) {
       if (
-        (error.response.status == 401 &&
-          error.response.data.error == "ExpiredJwtException") ||
-        error.response.data.error == "Unauthorized"
+        error.response.status == 401 &&
+        error.response.data.error == "ExpiredJwtException"
       ) {
         originalConfig._retry = true
 
@@ -55,9 +62,9 @@ api.interceptors.response.use(
 
           console.log("Refreshed")
 
-          return api(originalConfig)
+          return apiPrivate(originalConfig)
         } catch (e) {
-          window.location.replace("/login")
+          // window.location.replace("/login")
           console.log("Expired")
           localStorage.removeItem("access-token")
           localStorage.removeItem("refresh-token")

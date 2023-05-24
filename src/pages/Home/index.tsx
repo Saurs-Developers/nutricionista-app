@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 
-import { api } from "@/api/api"
+import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { Dialog } from "@/components/Dialog"
@@ -12,7 +12,7 @@ import { Typography } from "@/components/Typography"
 export function Home() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["users"],
-    queryFn: () => api.get("/v1/users"),
+    queryFn: () => apiPrivate.get("/v1/users"),
   })
 
   return (

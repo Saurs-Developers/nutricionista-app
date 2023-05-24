@@ -37,8 +37,8 @@ export function Login() {
       localStorage.setItem("access-token", data.token)
       localStorage.setItem("refresh-token", data.refresh_token)
       window.location.replace("/home")
-    } else return
-  }, [isSuccess, isError])
+    }
+  }, [isSuccess])
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
