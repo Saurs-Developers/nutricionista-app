@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -18,7 +19,7 @@ export function Login() {
     formState: { errors },
   } = useForm<LoginProps>({
     resolver: zodResolver(loginSchema),
-    mode: "onBlur",
+    mode: "onChange",
   })
 
   const { data, isError, isSuccess, mutate: login, isLoading } = useUserLogin()
@@ -57,7 +58,7 @@ export function Login() {
         />
         <Input
           label="Senha"
-          {...register("password")}
+          {...(register("password"), { type: "password" })}
           error={errors.password?.message as string}
           placeholder="********"
         />
@@ -67,11 +68,11 @@ export function Login() {
         {isError && (
           <span className="text-red-500">Falha ao efetuar o login!</span>
         )}
-        <a className="self-end underline" href="#">
+        <Link className="self-end underline" to="/reset-password">
           <Typography as="span" variant="md" type="body">
             Esqueceu sua senha?
           </Typography>
-        </a>
+        </Link>
       </form>
     </div>
   )

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route } from "react-router-dom"
 
 import { Chat } from "./pages/Chat"
 import { Diet } from "./pages/Diet"
@@ -15,7 +15,7 @@ import { Layout } from "./layout"
 
 export default function App() {
   return (
-    <Routes>
+    <>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/chat" element={<Chat />} />
@@ -30,6 +30,6 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/first-access" element={<FirstAccess />} />
-    </Routes>
+    </>
   )
 }
