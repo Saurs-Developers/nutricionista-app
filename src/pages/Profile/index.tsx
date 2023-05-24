@@ -10,7 +10,12 @@ export function Profile() {
   return (
     <div>
       <header>
-        <Typography className="text-neutral-900" variant="sm" type="heading">
+        <Typography
+          as="h2"
+          className="text-neutral-900"
+          variant="sm"
+          type="heading"
+        >
           Perfil
         </Typography>
       </header>

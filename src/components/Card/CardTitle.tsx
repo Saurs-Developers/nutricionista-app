@@ -17,7 +17,7 @@ export function CardTitle({ children }: CardTitleProps) {
 
   return (
     <Typography
-      className="text-brand-primary"
+      className="text-neutral-900"
       as="h2"
       variant="xs"
       type="heading"

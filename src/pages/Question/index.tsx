@@ -12,7 +12,12 @@ export function Question() {
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
-        <Typography className="text-neutral-700" variant="xs" type="heading">
+        <Typography
+          as="h2"
+          className="text-neutral-700"
+          variant="xs"
+          type="heading"
+        >
           Pode Beber?
         </Typography>
       </header>

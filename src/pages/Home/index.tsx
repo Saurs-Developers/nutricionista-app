@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
 
+import { api } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { Dialog } from "@/components/Dialog"
@@ -8,10 +10,20 @@ import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
 
 export function Home() {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => api.get("/v1/users"),
+  })
+
   return (
     <div>
       <header>
-        <Typography className="text-neutral-900" variant="sm" type="heading">
+        <Typography
+          as="h2"
+          className="text-neutral-900"
+          variant="sm"
+          type="heading"
+        >
           Olá, Jefté
         </Typography>
       </header>

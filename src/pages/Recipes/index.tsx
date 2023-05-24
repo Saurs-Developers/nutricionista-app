@@ -17,7 +17,7 @@ export function Recipes() {
         </button>
         <Input placeholder="Pesquisar" searchIcon />
       </header>
-      <Typography className="my-6" type="heading" variant="xs">
+      <Typography as="h2" className="my-6" type="heading" variant="xs">
         Minhas receitas
       </Typography>
       <div className="flex flex-col gap-6">

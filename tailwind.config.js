@@ -7,9 +7,9 @@ export default {
         nunito: "Nunito, sans-serif",
       },
       colors: {
-        "brand-primary": "#65b884",
-        "brand-darker": "#5CB17B",
-        "brand-secondary": "#8BA0FF",
+        "brand-primary": "#2C2C2C",
+        "brand-darker": "#262626",
+        "brand-secondary": "#787878",
         danger: "#D65151",
         "danger-darker": "#df5050",
         "neutral-100": "#F7F9FC",

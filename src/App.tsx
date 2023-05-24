@@ -1,13 +1,16 @@
 import { Route, Routes } from "react-router-dom"
 
-import { Chat } from "./pages/Chat/Chat"
-import { Diet } from "./pages/Diet/Diet"
-import { Faq } from "./pages/Faq/Faq"
-import { Home } from "./pages/Home/Home"
-import { Profile } from "./pages/Profile/Profile"
-import { Question } from "./pages/Question/Question"
-import { Recipes } from "./pages/Recipes/Recipes"
-import { Workout } from "./pages/Workout/Workout"
+import { Chat } from "./pages/Chat"
+import { Diet } from "./pages/Diet"
+import { Faq } from "./pages/Faq"
+import { FirstAccess } from "./pages/FirstAccess"
+import { Home } from "./pages/Home"
+import { Login } from "./pages/Login"
+import { Profile } from "./pages/Profile"
+import { Question } from "./pages/Question"
+import { Recipes } from "./pages/Recipes"
+import { ResetPassword } from "./pages/ResetPassword"
+import { Workout } from "./pages/Workout"
 import { Layout } from "./layout"
 
 export default function App() {
@@ -24,6 +27,9 @@ export default function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="*" element={<Home />} />
       </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/first-access" element={<FirstAccess />} />
     </Routes>
   )
 }

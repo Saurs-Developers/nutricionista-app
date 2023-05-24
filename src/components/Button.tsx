@@ -1,9 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  forwardRef,
-  ForwardRefRenderFunction,
-  ReactNode,
-} from "react"
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react"
 
 const buttonVariants = {
   filled:
@@ -16,7 +11,7 @@ const buttonVariants = {
 }
 
 const baseStyles =
-  "flex items-center gap-2 justify-center font-nunito rounded-md h-10 w-full px-2 focus:ring focus:ring-2 focus:ring-offset-2 transition outline-none"
+  "flex items-center gap-2 justify-center font-nunito rounded-md h-10 w-full px-2 focus:ring focus:ring-2 focus:ring-offset-2 transition outline-none disabled:opacity-70 disabled:pointer-events-none"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "filled" | "outlined" | "danger" | "danger-outlined"
@@ -26,21 +21,20 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export type ButtonRef = HTMLButtonElement
 
-const ButtonComponent: ForwardRefRenderFunction<ButtonRef, ButtonProps> = (
-  { variant, children, className, ...props }: ButtonProps,
-  ref,
-) => {
-  return (
-    <button
-      {...props}
-      ref={ref}
-      className={`${baseStyles} ${buttonVariants[variant!]} ${
-        className && className
-      }`}
-    >
-      {children}
-    </button>
-  )
-}
+export const Button = forwardRef<ButtonRef, ButtonProps>(
+  ({ variant, children, className, ...props }: ButtonProps, ref) => {
+    return (
+      <button
+        {...props}
+        ref={ref}
+        className={`${baseStyles} ${buttonVariants[variant!]} ${
+          className && className
+        }`}
+      >
+        {children}
+      </button>
+    )
+  },
+)
 
-export const Button = forwardRef(ButtonComponent)
+Button.displayName = "Button"

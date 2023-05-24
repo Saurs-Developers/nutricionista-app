@@ -15,7 +15,12 @@ export function Faq() {
   return (
     <div>
       <header>
-        <Typography className="text-neutral-900" variant="sm" type="heading">
+        <Typography
+          as="h2"
+          className="text-neutral-900"
+          variant="sm"
+          type="heading"
+        >
           Perguntas frequentes
         </Typography>
       </header>
