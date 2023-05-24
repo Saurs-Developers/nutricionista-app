@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "serve dist -s -n -L -p 4173"
+    "start": "serve dist -s -n -L -p $PORT"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
