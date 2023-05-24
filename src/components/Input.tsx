@@ -1,7 +1,7 @@
-import { forwardRef, HTMLAttributes } from "react"
+import { forwardRef, HTMLAttributes, InputHTMLAttributes } from "react"
 import { MagnifyingGlass } from "phosphor-react"
 
-interface InputProps extends HTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id?: string
   placeholder: string
   label?: string

@@ -37,7 +37,7 @@ export function Login() {
       localStorage.setItem("access-token", data.token)
       localStorage.setItem("refresh-token", data.refresh_token)
       window.location.replace("/home")
-    }
+    } else return
   }, [isSuccess, isError])
 
   return (
@@ -59,6 +59,7 @@ export function Login() {
         <Input
           label="Senha"
           {...register("password")}
+          type="password"
           error={errors.password?.message as string}
           placeholder="********"
         />

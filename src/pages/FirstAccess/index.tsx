@@ -56,13 +56,15 @@ export function FirstAccess() {
         </Typography>
         <Input
           label="Senha"
-          {...(register("password"), { type: "password" })}
+          type="password"
+          {...register("password")}
           error={errors.password?.message as string}
           placeholder="********"
         />
         <Input
           label="Confirmar senha"
-          {...(register("password_confirmation"), { type: "password" })}
+          type="password"
+          {...register("password_confirmation")}
           error={errors.password_confirmation?.message as string}
           placeholder="********"
         />

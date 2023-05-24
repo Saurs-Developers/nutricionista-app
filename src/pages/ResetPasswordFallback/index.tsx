@@ -15,6 +15,7 @@ export function ResetPasswordFallback() {
 
   // status: success, failed ou unknown
   // reason: valid token, used-token, expired-token, token-not-found, unknown
+  //origin forgot-password ou first-access
   // token: string ou nada
 
   return <Fallback />

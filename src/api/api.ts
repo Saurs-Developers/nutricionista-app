@@ -1,7 +1,9 @@
 import axios from "axios"
 
+const baseURL = "https://nutricionista-api-dev.up.railway.app/api"
+
 export const api = axios.create({
-  baseURL: "https://nutricionista-api-auth.up.railway.app/api",
+  baseURL: baseURL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -30,11 +32,7 @@ api.interceptors.response.use(
     console.log(error)
     const originalConfig = error.config
 
-    if (
-      originalConfig.url !==
-        "https://nutricionista-api-auth.up.railway.app/api/v1/login" &&
-      error.response
-    ) {
+    if (originalConfig.url !== `${baseURL}v1/login` && error.response) {
       if (
         (error.response.status == 401 &&
           error.response.data.error == "ExpiredJwtException") ||
