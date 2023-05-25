@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 
@@ -12,8 +13,14 @@ import { Typography } from "@/components/Typography"
 export function Home() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["users"],
-    queryFn: () => apiPrivate.get("/v1/users"),
+    queryFn: () => apiPrivate.get("/v1/users/me"),
   })
+
+  useEffect(() => {
+    if (!isLoading) {
+      console.log(data)
+    }
+  }, [data])
 
   return (
     <div>
@@ -149,6 +156,62 @@ export function Home() {
             </div>
           </Dialog>
         </section>
+        <div className="flex flex-col gap-3">
+          <button
+            type="button"
+            onClick={async () => {
+              const refreshfodase = localStorage.getItem("refresh-token")!
+
+              console.log(refreshfodase)
+
+              const res = await apiPrivate.post("/v1/auth/refresh", {
+                refresh_token: refreshfodase,
+              })
+
+              const access = res.data.token
+              const refresh = res.data.refresh_token
+
+              localStorage.setItem("access-token", access)
+              localStorage.setItem("refresh-token", refresh)
+
+              console.log("Refreshed")
+            }}
+          >
+            refreshar
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.setItem(
+                "access-token",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDk1MjcwOSwiZXhwIjoxNjg0OTUzOTA5fQ.t4y1d2A4drloiBr2P5KVUPzWaPxJCi-VPoFQH9cmBu0",
+              )
+              console.log(localStorage.getItem("access-token"))
+            }}
+          >
+            invalidar
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.setItem(
+                "access-token",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDk1MjcwOSwiZXhwIjoxNjg0OTUzOTA5fQ.t4y1d2A4drloiBr2P5KVUPzWaPxJCi-VPoFQH9cmBu0",
+              )
+              localStorage.setItem(
+                "access-token",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDk1MjcwOSwiZXhwIjoxNjg0OTUzOTA5fQ.t4y1d2A4drloiBr2P5KVUPzWaPxJCi-VPoFQH9cmBu0",
+              )
+              localStorage.setItem(
+                "refresh-token",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDQ2NTQ2MywiZXhwIjoxNjg1MDcwMjYzfQ.5RacsQKhLmkITFicIGtNEFmm1r7et8y0CDZbGjgzU8oASDF",
+              )
+              console.log(localStorage.getItem("access-token"))
+            }}
+          >
+            invalidar TUDO
+          </button>
+        </div>
       </div>
     </div>
   )

@@ -36,7 +36,7 @@ export function Login() {
     if (isSuccess) {
       localStorage.setItem("access-token", data.token)
       localStorage.setItem("refresh-token", data.refresh_token)
-      window.location.replace("/home")
+      window.location.replace("/")
     }
   }, [isSuccess])
 

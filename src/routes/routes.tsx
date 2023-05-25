@@ -23,7 +23,7 @@ export const routesConfig: RouteObject[] = [
     element: <NotFound />,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -46,7 +46,7 @@ export const routesConfig: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: "home",
+        path: "/",
         element: <Home />,
       },
       {
