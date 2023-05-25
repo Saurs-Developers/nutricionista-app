@@ -23,7 +23,7 @@ apiPrivate.interceptors.request.use(
     const token = localStorage.getItem("access-token")
 
     if (token) {
-      config.headers!["Authorization"] = "Bearer " + token
+      config.headers!["Authorization"] = "Bearerr " + token
     }
     return config
   },
