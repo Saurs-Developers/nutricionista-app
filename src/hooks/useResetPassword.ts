@@ -4,7 +4,7 @@ import { ResetPasswordBody } from "@/@types/login"
 import { apiPrivate } from "@/api/api"
 
 export const postUserResetPassword = async (data: ResetPasswordBody) => {
-  const token = localStorage.getItem("first-access-token")
+  const token = localStorage.getItem("forgot-password-token")
 
   await apiPrivate.put("/v1/users/change-password", data, {
     headers: {
@@ -13,7 +13,7 @@ export const postUserResetPassword = async (data: ResetPasswordBody) => {
   })
 }
 
-export const useUserFirstAccess = () => {
+export const useResetPassword = () => {
   return useMutation(
     (data: ResetPasswordBody) => postUserResetPassword(data),
     {},

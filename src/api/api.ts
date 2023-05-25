@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
+
+import { router } from "@/App"
 
 export const baseURL = "https://nutricionista-api-dev.up.railway.app/api"
 
@@ -65,7 +68,7 @@ apiPrivate.interceptors.response.use(
 
           return apiPrivate(originalConfig)
         } catch (e) {
-          window.location.replace("/login")
+          router.navigate("/login")
           localStorage.removeItem("access-token")
           localStorage.removeItem("refresh-token")
 

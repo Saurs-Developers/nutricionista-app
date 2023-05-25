@@ -3,11 +3,10 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
-import jwt_decode from "jwt-decode"
 import { ArrowLeft } from "phosphor-react"
 import * as z from "zod"
 
-import { apiPrivate } from "@/api/api"
+import { api } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
@@ -24,7 +23,7 @@ export function ResetPasswordEmail() {
     isError,
   } = useMutation({
     mutationFn: (data: SendEmailProps) =>
-      apiPrivate.post("/v1/users/forgot-password", data),
+      api.post("/v1/users/forgot-password?email=" + data.email),
   })
 
   const [isEmailSent, setIsEmailSent] = useState(false)
@@ -83,7 +82,9 @@ export function ResetPasswordEmail() {
               error={errors.email?.message as string}
               placeholder="name@example.com"
             />
-            <Button variant="filled">Enviar e-mail</Button>
+            <Button disabled={isLoading} variant="filled">
+              Enviar e-mail
+            </Button>
           </>
         )}
         {isError && (

@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom"
 import { NotFound } from "@/pages/404"
 import { Chat } from "@/pages/Chat"
 import { Diet } from "@/pages/Diet"
+import { Error } from "@/pages/Error"
 import { Faq } from "@/pages/Faq"
 import { FirstAccess } from "@/pages/FirstAccess"
 import { Home } from "@/pages/Home"
@@ -23,7 +24,11 @@ export const routesConfig: RouteObject[] = [
     element: <NotFound />,
   },
   {
-    path: "/login",
+    path: "error",
+    element: <Error />,
+  },
+  {
+    path: "login",
     element: <Login />,
   },
   {

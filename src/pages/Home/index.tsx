@@ -194,19 +194,8 @@ export function Home() {
           <button
             type="button"
             onClick={() => {
-              localStorage.setItem(
-                "access-token",
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDk1MjcwOSwiZXhwIjoxNjg0OTUzOTA5fQ.t4y1d2A4drloiBr2P5KVUPzWaPxJCi-VPoFQH9cmBu0",
-              )
-              localStorage.setItem(
-                "access-token",
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDk1MjcwOSwiZXhwIjoxNjg0OTUzOTA5fQ.t4y1d2A4drloiBr2P5KVUPzWaPxJCi-VPoFQH9cmBu0",
-              )
-              localStorage.setItem(
-                "refresh-token",
-                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NDQ2NTQ2MywiZXhwIjoxNjg1MDcwMjYzfQ.5RacsQKhLmkITFicIGtNEFmm1r7et8y0CDZbGjgzU8oASDF",
-              )
-              console.log(localStorage.getItem("access-token"))
+              localStorage.removeItem("access-token")
+              localStorage.removeItem("refresh-token")
             }}
           >
             invalidar TUDO

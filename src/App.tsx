@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
   },
 })
 
-const router = createBrowserRouter(routesConfig)
+export const router = createBrowserRouter(routesConfig)
 
 export default function App() {
   return (

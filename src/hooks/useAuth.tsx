@@ -7,8 +7,8 @@ export const useAuth = () => {
   const navigate = useNavigate()
 
   const checkUserLogin = () => {
-    const token = localStorage.getItem("refresh-token")
-    if (!token) {
+    const refresh_token = localStorage.getItem("refresh-token")
+    if (!refresh_token) {
       setIsLoggedIn(false)
       navigate("/login")
     }

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -7,12 +8,16 @@ import * as z from "zod"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
+import { useAuth } from "@/hooks/useAuth"
+import { useResetPassword } from "@/hooks/useResetPassword"
 import { resetPasswordSchema } from "@/schemas/resetPassword"
 
 export type ResetPasswordProps = z.infer<typeof resetPasswordSchema>
 
 export function ResetPassword() {
   const navigate = useNavigate()
+
+  const { mutate: reset, isLoading, isSuccess, isError } = useResetPassword()
 
   const {
     register,
@@ -24,8 +29,16 @@ export function ResetPassword() {
   })
 
   const onSubmit = async (formData: ResetPasswordProps) => {
+    reset({ password: formData.password_confirmation })
     console.log(formData)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/login")
+      localStorage.removeItem("forgot-password-token")
+    }
+  }, [isSuccess, isError])
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
@@ -47,20 +60,24 @@ export function ResetPassword() {
         </Typography>
         <Input
           label="Senha"
-          {...(register("password"), { type: "password" })}
+          {...register("password")}
+          type="password"
           error={errors.password?.message as string}
           placeholder="********"
         />
         <Input
           label="Confirmar senha"
-          {...(register("password_confirmation"), { type: "password" })}
+          {...register("password_confirmation")}
+          type="password"
           error={errors.password_confirmation?.message as string}
           placeholder="********"
         />
-        <Button variant="filled">Alterar senha</Button>
-        {/* {isError && (
-          <span className="text-red-500">Falha ao efetuar o login!</span>
-        )} */}
+        <Button disabled={isLoading} variant="filled">
+          Alterar senha
+        </Button>
+        {isError && (
+          <span className="text-red-500">Falha ao redefinir senha!</span>
+        )}
       </form>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -13,6 +13,8 @@ import { loginSchema } from "@/schemas/login"
 type LoginProps = z.infer<typeof loginSchema>
 
 export function Login() {
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -36,7 +38,7 @@ export function Login() {
     if (isSuccess) {
       localStorage.setItem("access-token", data.token)
       localStorage.setItem("refresh-token", data.refresh_token)
-      window.location.replace("/")
+      navigate("/")
     }
   }, [isSuccess])
 
@@ -67,7 +69,7 @@ export function Login() {
           Entrar
         </Button>
         {isError && (
-          <span className="text-red-500">Falha ao efetuar o login!</span>
+          <span className="text-red-500">Usuário ou senha incorretos.</span>
         )}
         <Link className="self-end underline" to="/reset-password-email">
           <Typography as="span" variant="md" type="body">
