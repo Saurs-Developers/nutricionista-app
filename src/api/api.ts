@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 import { router } from "@/App"
 
-export const baseURL = "https://nutricionista-api-dev.up.railway.app/api"
+export const baseURL = import.meta.env.VITE_BASE_URL
 
 export const api = axios.create({
   baseURL: baseURL,

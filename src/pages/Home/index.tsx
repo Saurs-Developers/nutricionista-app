@@ -11,7 +11,7 @@ import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
 
 export function Home() {
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: () => apiPrivate.get("/v1/users/me"),
   })
@@ -19,6 +19,7 @@ export function Home() {
   useEffect(() => {
     if (!isLoading) {
       console.log(data)
+      console.log(import.meta.env.VITE_BASE_URL)
     }
   }, [data])
 
