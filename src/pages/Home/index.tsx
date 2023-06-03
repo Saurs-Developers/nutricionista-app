@@ -1,6 +1,5 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
+import { Link, useOutletContext } from "react-router-dom"
 
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
@@ -9,19 +8,20 @@ import { Dialog } from "@/components/Dialog"
 import { Input } from "@/components/Input"
 import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
+import { useUserData } from "@/hooks/useUserData"
+
+interface IWorkout {
+  id: string
+  titulo: string
+  foco: string
+  dias: string[]
+}
 
 export function Home() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["users"],
-    queryFn: () => apiPrivate.get("/v1/users/me"),
-  })
+  const { avaliacoes, nome } = useUserData()
 
-  useEffect(() => {
-    if (!isLoading) {
-      console.log(data)
-      console.log(import.meta.env.VITE_BASE_URL)
-    }
-  }, [data])
+  const treinos = avaliacoes[0].treinos
+  const dietas = avaliacoes[0].dietas
 
   return (
     <div>
@@ -32,7 +32,7 @@ export function Home() {
           variant="sm"
           type="heading"
         >
-          Olá, Jefté
+          Olá, {nome}
         </Typography>
       </header>
       <div className="mt-5 space-y-4">
@@ -47,45 +47,29 @@ export function Home() {
             </Typography>
           </header>
           <div className="snap-x snap-mandatory flex gap-4 overflow-auto mt-2">
-            <div className="snap-start snap-always">
-              <Link to="/workout">
-                <Card
-                  info={
-                    <>
-                      <Card.Title>Treino A Quadriceps</Card.Title>
-                      <Card.Subtitle>Segunda-feira</Card.Subtitle>
-                    </>
-                  }
-                  image={<Card.Image src="http://placekitten.com/400/400" />}
-                />
-              </Link>
-            </div>
-            <div className="snap-start snap-always">
-              <Link to="/workout">
-                <Card
-                  info={
-                    <>
-                      <Card.Title>Treino B Peito</Card.Title>
-                      <Card.Subtitle>Terça-feira</Card.Subtitle>
-                    </>
-                  }
-                  image={<Card.Image src="http://placekitten.com/400/400" />}
-                />
-              </Link>
-            </div>
-            <div className="snap-start snap-always">
-              <Link to="/workout">
-                <Card
-                  info={
-                    <>
-                      <Card.Title>Treino C Costas</Card.Title>
-                      <Card.Subtitle>Quarta-feira</Card.Subtitle>
-                    </>
-                  }
-                  image={<Card.Image src="http://placekitten.com/400/400" />}
-                />
-              </Link>
-            </div>
+            {treinos.map((treino, key) => {
+              return (
+                <div key={key} className="snap-start snap-always">
+                  <Link to="/workout">
+                    <Card
+                      info={
+                        <>
+                          <Card.Title>{treino.titulo}</Card.Title>
+                          <Card.Subtitle>
+                            {treino.dias.map((dia, key) => {
+                              return <span key={key}>{dia}</span>
+                            })}
+                          </Card.Subtitle>
+                        </>
+                      }
+                      image={
+                        <Card.Image src="http://placekitten.com/400/400" />
+                      }
+                    />
+                  </Link>
+                </div>
+              )
+            })}
           </div>
         </section>
         <section>
@@ -99,30 +83,26 @@ export function Home() {
             </Typography>
           </header>
           <div className="snap-x snap-mandatory flex gap-4 overflow-auto mt-2 mb-4">
-            <div className="snap-start snap-always">
-              <Link to="/diet">
-                <Card
-                  info={
-                    <>
-                      <Card.Title>Dieta A</Card.Title>
-                      <Card.Subtitle>Dias de treino</Card.Subtitle>
-                    </>
-                  }
-                />
-              </Link>
-            </div>
-            <div className="snap-start snap-always">
-              <Link to="/diet">
-                <Card
-                  info={
-                    <>
-                      <Card.Title>Dieta B</Card.Title>
-                      <Card.Subtitle>Dias sem treino</Card.Subtitle>
-                    </>
-                  }
-                />
-              </Link>
-            </div>
+            {dietas.map((dieta, key) => {
+              return (
+                <div key={key} className="snap-start snap-always">
+                  <Link to="/diet">
+                    <Card
+                      info={
+                        <>
+                          <Card.Title>{dieta.titulo}</Card.Title>
+                          <Card.Subtitle>
+                            {dieta.is_dia_de_treino
+                              ? "Dias de treino"
+                              : "Dias de descanso"}
+                          </Card.Subtitle>
+                        </>
+                      }
+                    />
+                  </Link>
+                </div>
+              )
+            })}
           </div>
           <Link to="/recipes">
             <Button variant="filled">Acessar minhas receitas</Button>
