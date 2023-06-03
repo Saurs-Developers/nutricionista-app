@@ -1,5 +1,4 @@
-import { useEffect } from "react"
-import { Link, useOutletContext } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
@@ -9,6 +8,7 @@ import { Input } from "@/components/Input"
 import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
 import { useUserData } from "@/hooks/useUserData"
+import { weekdayChooser, WeekDays } from "@/utils/weekdaychooser"
 
 interface IWorkout {
   id: string
@@ -56,9 +56,7 @@ export function Home() {
                         <>
                           <Card.Title>{treino.titulo}</Card.Title>
                           <Card.Subtitle>
-                            {treino.dias.map((dia, key) => {
-                              return <span key={key}>{dia}</span>
-                            })}
+                            {weekdayChooser(treino.dias as WeekDays[])}
                           </Card.Subtitle>
                         </>
                       }
