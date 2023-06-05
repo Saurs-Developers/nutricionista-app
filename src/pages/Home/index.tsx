@@ -10,13 +10,6 @@ import { Typography } from "@/components/Typography"
 import { useUserData } from "@/hooks/useUserData"
 import { weekdayChooser, WeekDays } from "@/utils/weekdaychooser"
 
-interface IWorkout {
-  id: string
-  titulo: string
-  foco: string
-  dias: string[]
-}
-
 export function Home() {
   const { avaliacoes, nome } = useUserData()
 
@@ -50,7 +43,7 @@ export function Home() {
             {treinos.map((treino, key) => {
               return (
                 <div key={key} className="snap-start snap-always">
-                  <Link to="/workout">
+                  <Link to={`/workout/${treino.id}`}>
                     <Card
                       info={
                         <>
@@ -84,7 +77,7 @@ export function Home() {
             {dietas.map((dieta, key) => {
               return (
                 <div key={key} className="snap-start snap-always">
-                  <Link to="/diet">
+                  <Link to={`diet/${dieta.id}`}>
                     <Card
                       info={
                         <>

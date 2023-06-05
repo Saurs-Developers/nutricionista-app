@@ -1,4 +1,4 @@
-interface Alimento {
+export interface Alimento {
   id: string
   nome: string
   umidade: number
@@ -30,13 +30,15 @@ interface Alimento {
   created_at: string
   updated_at: string
 }
-interface Item {
+
+export interface Item {
   id: string
   medida: string
   quantidade: number
   alimento: Alimento
 }
-interface Refeicoes {
+
+export interface Refeicoes {
   id: string
   titulo: string
   itens: Item[]
@@ -45,7 +47,8 @@ interface Refeicoes {
   created_at: string
   updated_at: string
 }
-interface Dieta {
+
+export interface Dieta {
   id: string
   titulo: string
   refeicoes: Refeicoes[]
@@ -53,7 +56,30 @@ interface Dieta {
   created_at: string
   updated_at: string
 }
-interface Treino {
+
+export interface Exercicio {
+  id: string
+  series: number
+  repeticoes: number
+  carga: number
+  observacao: string
+  atividade: Atividade
+  tempo_descanso: number
+  created_at: string
+  updated_at: string
+}
+
+export interface Atividade {
+  id: string
+  titulo: string
+  equipamento: string
+  video: string
+  grupo_muscular: string
+  created_at: string
+  updated_at: string
+}
+
+export interface Treino {
   id: string
   titulo: string
   foco: string
@@ -62,7 +88,8 @@ interface Treino {
   created_at: string
   updated_at: string
 }
-interface Avaliacoes {
+
+export interface Avaliacoes {
   id: string
   vencimento: string
   fotos?: any
@@ -96,6 +123,7 @@ interface Avaliacoes {
   created_at: string
   updated_at: string
 }
+
 export interface IUserData {
   id: string
   nome: string
