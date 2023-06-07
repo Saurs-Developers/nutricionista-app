@@ -1,12 +1,21 @@
+import { DateTime } from "luxon"
 import { FilePdf } from "phosphor-react"
 
 import { Button } from "@/components/Button"
 import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
+import { useUserData } from "@/hooks/useUserData"
+import { calculateAge } from "@/utils/formatDateDistance"
 
 const options = ["21/03 -  21/05", "21/05 -  21/07"]
 
 export function Profile() {
+  const { avaliacoes, nome, data_nascimento } = useUserData()
+
+  const latestAvaliacao = avaliacoes[avaliacoes.length - 1]
+
+  const birthDate = DateTime.fromISO(new Date(data_nascimento).toISOString())
+
   return (
     <div>
       <header>
@@ -36,14 +45,15 @@ export function Profile() {
               variant="xxs"
               type="heading"
             >
-              Jefté Medeiros
+              {nome}
             </Typography>
             <Typography
               className="text-neutral-600"
               variant="xxs"
               type="heading"
             >
-              19 anos, 83kg, 1.83m
+              {calculateAge("15/12/2003")}
+              anos, {latestAvaliacao?.peso}kg, {latestAvaliacao.altura}m
             </Typography>
           </div>
         </section>

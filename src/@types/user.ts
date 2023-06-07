@@ -33,12 +33,13 @@ export interface Alimento {
 
 export interface Item {
   id: string
+  descricao: string
   medida: string
   quantidade: number
   alimento: Alimento
 }
 
-export interface Refeicoes {
+export interface Refeicao {
   id: string
   titulo: string
   itens: Item[]
@@ -51,7 +52,7 @@ export interface Refeicoes {
 export interface Dieta {
   id: string
   titulo: string
-  refeicoes: Refeicoes[]
+  refeicoes: Refeicao[]
   is_dia_de_treino: boolean
   created_at: string
   updated_at: string

@@ -1,13 +1,34 @@
-import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft } from "phosphor-react"
 
+import { Dieta, Refeicao } from "@/@types/user"
+import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
+import {
+  MeasurementUnit,
+  measurementUnitChooser,
+} from "@/utils/measurementUnitChooser"
 
 export function Diet() {
   const navigate = useNavigate()
+
+  const { id } = useParams()
+
+  const { data: res, isLoading } = useQuery({
+    queryKey: ["dieta"],
+    queryFn: () => apiPrivate.get(`/v1/dietas/${id}`),
+  })
+
+  const dieta: Dieta = res?.data
+
+  useEffect(() => {
+    !isLoading && console.log(dieta)
+  }, [])
 
   return (
     <div>
@@ -18,46 +39,40 @@ export function Diet() {
         <Input placeholder="Pesquisar" searchIcon />
       </header>
       <Typography as="h2" className="my-6" type="heading" variant="xs">
-        Dieta - A (Dias de treino)
+        {!isLoading && dieta.titulo}
       </Typography>
-      <Button variant="filled">Acesasr minhas receitas</Button>
+      <Link to="/recipes">
+        <Button variant="filled">Acessar minhas receitas</Button>
+      </Link>
       <div className="flex flex-col gap-6 mt-8">
-        <Card
-          info={
-            <>
-              <Card.Title>Refeição #1</Card.Title>
-              <Card.Subtitle>8 - 9h</Card.Subtitle>
-              <Card.Description>
-                130g de tapioca ou 250g de batata doce ou 200g de mandioca ou
-                220g de cuscuz
-              </Card.Description>
-              <Card.Description>
-                4 ovos inteiros, cozidos mexidos ou em omelete ou 180g de atum
-                ou 150g de carne moída
-              </Card.Description>
-              <Card.Description>1 Porção de fruta</Card.Description>
-              <Card.Description>100ml de café puro</Card.Description>
-            </>
-          }
-        />
-        <Card
-          info={
-            <>
-              <Card.Title>Refeição #1</Card.Title>
-              <Card.Subtitle>8 - 9h</Card.Subtitle>
-              <Card.Description>
-                130g de tapioca ou 250g de batata doce ou 200g de mandioca ou
-                220g de cuscuz
-              </Card.Description>
-              <Card.Description>
-                4 ovos inteiros, cozidos mexidos ou em omelete ou 180g de atum
-                ou 150g de carne moída
-              </Card.Description>
-              <Card.Description>1 Porção de fruta</Card.Description>
-              <Card.Description>100ml de café puro</Card.Description>
-            </>
-          }
-        />
+        {!isLoading &&
+          dieta.refeicoes.map((refeicao, key) => {
+            return (
+              <Card
+                key={key}
+                info={
+                  <>
+                    <Card.Title>{refeicao.titulo}</Card.Title>
+                    <Card.Subtitle>
+                      {refeicao.horario_fim}h - {refeicao.horario_fim}h
+                    </Card.Subtitle>
+                    {refeicao.itens.map((item, key) => {
+                      return (
+                        <div key={key}>
+                          {item.quantidade}{" "}
+                          {measurementUnitChooser(
+                            item.medida as MeasurementUnit,
+                            item.quantidade,
+                          )}{" "}
+                          de {item.descricao}
+                        </div>
+                      )
+                    })}
+                  </>
+                }
+              />
+            )
+          })}
       </div>
     </div>
   )
