@@ -6,6 +6,7 @@ import { RecipeResponse } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
+import { LazyLoading } from "@/components/Card/LazyLoading"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 import { useAuth } from "@/hooks/useAuth"
@@ -25,6 +26,8 @@ export function Recipes() {
 
   const data = res?.results
 
+  const hasRecipes = !isLoading && data!.length > 0
+
   return (
     <div>
       <header className="flex items-center gap-4">
@@ -37,7 +40,13 @@ export function Recipes() {
         Minhas receitas
       </Typography>
       <div className="flex flex-col gap-6">
-        {!isLoading && data!.length > 0 ? (
+        {isLoading ? (
+          <div className="flex flex-col gap-4">
+            <LazyLoading />
+            <LazyLoading />
+            <LazyLoading />
+          </div>
+        ) : hasRecipes ? (
           data!.map((receita, key) => {
             return (
               <Card
@@ -61,7 +70,9 @@ export function Recipes() {
             )
           })
         ) : (
-          <div>Nenhuma receita cadastrada.</div>
+          <Typography type="body" variant="md">
+            Nenhuma receita foi encontrada.
+          </Typography>
         )}
       </div>
     </div>
