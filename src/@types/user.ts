@@ -128,7 +128,7 @@ export interface Avaliacoes {
   updated_at: string
 }
 
-export interface Recipe {
+export interface Receita {
   id: string
   titulo: string
   descricao: string
@@ -136,7 +136,7 @@ export interface Recipe {
   updated_at: string
 }
 
-export interface RecipeResponse extends PaginatedResponse<Recipe> {}
+export interface ReceitaResponse extends PaginatedResponse<Receita> {}
 
 export interface IUserData {
   id: string
@@ -148,6 +148,6 @@ export interface IUserData {
   notas: string
   contato: string
   avaliacoes: Avaliacoes[]
-  receitas: Recipe[]
+  receitas: Receita[]
   data_nascimento: string
 }

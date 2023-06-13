@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft } from "phosphor-react"
 
-import { Exercicio } from "@/@types/user"
+import { Exercicio, Treino } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
@@ -15,14 +15,14 @@ export function Workout() {
 
   const { id } = useParams()
 
-  const { data: res, isLoading } = useQuery({
-    queryKey: ["treinos"],
-    queryFn: () => apiPrivate.get(`/v1/treinos/${id}/exercicios`),
+  const { data: treino, isLoading } = useQuery<Treino>({
+    queryKey: ["treino"],
+    queryFn: () => apiPrivate.get(`/v1/treinos/${id}`).then(({ data }) => data),
   })
 
-  const treinos: Exercicio[] = res?.data.results
+  const exercicios = treino?.exercicios
 
-  const hasWorkouts = !isLoading && treinos!.length > 0
+  const hasExercicios = !isLoading && exercicios!.length > 0
 
   return (
     <div>
@@ -35,15 +35,15 @@ export function Workout() {
       <Typography as="h2" className="my-6" type="heading" variant="xs">
         Treino A Quadríceps
       </Typography>
-      <div className="flex flex-col gap-6 snap-y">
+      <div className="flex flex-col gap-6 mt-8">
         {isLoading ? (
           <div className="flex flex-col gap-4">
             <LazyLoading />
             <LazyLoading />
             <LazyLoading />
           </div>
-        ) : hasWorkouts ? (
-          treinos.map((exercicio, key) => {
+        ) : hasExercicios ? (
+          exercicios!.map((exercicio, key) => {
             return (
               <Card
                 key={key}
@@ -73,8 +73,8 @@ export function Workout() {
             )
           })
         ) : (
-          <Typography variant="md" type="body">
-            Nenhum exercício adicionado
+          <Typography type="body" variant="md">
+            Nenhuma exercício foi encontrada.
           </Typography>
         )}
       </div>

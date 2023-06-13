@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft, Pencil } from "phosphor-react"
 
-import { RecipeResponse } from "@/@types/user"
+import { ReceitaResponse } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
@@ -18,15 +18,15 @@ export function Recipes() {
 
   const id = userInfo.user_id!
 
-  const { data: res, isLoading } = useQuery<RecipeResponse>({
+  const { data, isLoading } = useQuery<ReceitaResponse>({
     queryKey: ["receitas"],
     queryFn: () =>
       apiPrivate.get(`/v1/clientes/${id}/receitas`).then(({ data }) => data),
   })
 
-  const data = res?.results
+  const receitas = data?.results
 
-  const hasRecipes = !isLoading && data!.length > 0
+  const hasRecipes = !isLoading && receitas!.length > 0
 
   return (
     <div>
@@ -47,7 +47,7 @@ export function Recipes() {
             <LazyLoading />
           </div>
         ) : hasRecipes ? (
-          data!.map((receita, key) => {
+          receitas!.map((receita, key) => {
             return (
               <Card
                 key={key}
