@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import { IUserData } from "@/@types/user"
@@ -9,15 +10,32 @@ import { Input } from "@/components/Input"
 import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
 import { useUserData } from "@/hooks/useUserData"
+import { useWaterConsumption } from "@/hooks/useWaterConsumption"
 import { weekdayChooser, WeekDays } from "@/utils/weekdaychooser"
 
 export function Home() {
   const { data } = useUserData()
+  const { addWater } = useWaterConsumption()
 
   const { nome, avaliacoes } = data as IUserData
 
   const treinos = avaliacoes[0]?.treinos
   const dietas = avaliacoes[0]?.dietas
+
+  const [updatedAmount, setCurrentAmount] = useState(() => {
+    const waterConsumption = localStorage.getItem("waterConsumption")
+
+    if (waterConsumption) {
+      const { amount } = JSON.parse(waterConsumption)
+      return amount
+    }
+
+    return 0
+  })
+
+  useEffect(() => {
+    addWater(updatedAmount)
+  }, [updatedAmount])
 
   return (
     <div>
@@ -120,23 +138,17 @@ export function Home() {
               Consumo diário de água
             </Typography>
             <Typography className="text-neutral-600" variant="sm" type="body">
-              Meta: 1500ml/3000ml
+              Meta: {updatedAmount}ml/3000ml
             </Typography>
           </header>
-          <ProgressBar value={50} />
+          <ProgressBar value={updatedAmount / 30} />
           <Dialog trigger="Registrar consumo de água" close="Adicionar">
-            <Input placeholder="Ex: 1000ml" />
-            <div className="flex gap-4">
-              <Button className="text-[14px]" variant="outlined">
-                +250ml
-              </Button>
-              <Button className="text-[14px]" variant="outlined">
-                +300ml
-              </Button>
-              <Button className="text-[14px]" variant="outlined">
-                +500ml
-              </Button>
-            </div>
+            <Input
+              maxLength={4}
+              max={3000}
+              onChange={(e) => setCurrentAmount(Number(e.target.value))}
+              placeholder="Ex: 1000ml"
+            />
           </Dialog>
         </section>
       </div>

@@ -9,7 +9,7 @@ export function Question() {
   return (
     <div>
       <header className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => navigate("/faq")}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
         <Typography

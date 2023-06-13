@@ -31,7 +31,7 @@ export function Diet() {
   return (
     <div>
       <header className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => navigate("/")}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
         <Input placeholder="Pesquisar" searchIcon />
@@ -39,9 +39,6 @@ export function Diet() {
       <Typography as="h2" className="my-6" type="heading" variant="xs">
         {!isLoading && dieta!.titulo}
       </Typography>
-      <Link to="/recipes">
-        <Button variant="filled">Acessar minhas receitas</Button>
-      </Link>
       <div className="flex flex-col gap-6 mt-8">
         {isLoading ? (
           <div className="flex flex-col gap-4">
@@ -88,6 +85,9 @@ export function Diet() {
             Nenhuma refeição foi encontrada.
           </Typography>
         )}
+        <Link to="/recipes">
+          <Button variant="filled">Acessar minhas receitas</Button>
+        </Link>
       </div>
     </div>
   )

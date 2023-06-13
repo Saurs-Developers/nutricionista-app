@@ -10,11 +10,17 @@ import { api } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
+import { useAuth } from "@/hooks/useAuth"
 
 export type SendEmailProps = z.infer<typeof sendEmailSchema>
 
 export function ResetPasswordEmail() {
+  const { isLoggedIn } = useAuth()
   const navigate = useNavigate()
+
+  if (isLoggedIn) {
+    navigate("/")
+  }
 
   const {
     mutate: sendEmail,

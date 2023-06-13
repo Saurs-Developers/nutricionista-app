@@ -11,8 +11,11 @@ export function ProgressBar({ value }: ProgressBarProps) {
       className="shadow-sm relative overflow-hidden bg-brand-primary/40 rounded-full w-full h-5 z-0"
     >
       <Progress.Indicator
-        style={{ transform: `translateX(-${100 - value}%)` }}
-        className={`progress-transition rounded-full bg-brand-primary w-full h-full`}
+        style={{
+          transform: `translateX(-${100 - value}%)`,
+          transition: "transform 660ms cubic-bezier(0.65, 0, 0.35, 1)",
+        }}
+        className={`rounded-full bg-brand-primary w-full h-full`}
       />
     </Progress.Root>
   )

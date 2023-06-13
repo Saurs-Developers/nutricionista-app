@@ -8,13 +8,19 @@ import * as z from "zod"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
+import { useAuth } from "@/hooks/useAuth"
 import { useResetPassword } from "@/hooks/useResetPassword"
 import { resetPasswordSchema } from "@/schemas/resetPassword"
 
 export type ResetPasswordProps = z.infer<typeof resetPasswordSchema>
 
 export function ResetPassword() {
+  const { isLoggedIn } = useAuth()
   const navigate = useNavigate()
+
+  if (isLoggedIn) {
+    navigate("/")
+  }
 
   const { mutate: reset, isLoading, isSuccess, isError } = useResetPassword()
 

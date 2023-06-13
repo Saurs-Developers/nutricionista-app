@@ -31,9 +31,9 @@ export const useAuth = () => {
     if (!refresh_token) {
       setIsLoggedIn(false)
       navigate("/login")
+    } else {
+      setIsLoggedIn(true)
     }
-
-    setIsLoggedIn(true)
   }
 
   useEffect(() => {
