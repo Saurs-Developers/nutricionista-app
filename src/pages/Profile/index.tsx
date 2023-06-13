@@ -6,21 +6,14 @@ import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
 import { useUserData } from "@/hooks/useUserData"
 import { calculateAge } from "@/utils/calculateAge"
+import { dateFormatter } from "@/utils/dateFormatter"
 
 export function Profile() {
-  const { data, isLoading } = useUserData()
+  const { data } = useUserData()
 
   const { nome, avaliacoes, data_nascimento } = data as IUserData
 
   const ultimaAvaliacao = avaliacoes[0]
-
-  const date = new Date(ultimaAvaliacao.vencimento)
-  const fimAcompanhamento = date.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  })
 
   return (
     <div>
@@ -75,8 +68,13 @@ export function Profile() {
           </Typography>
         )}
         <Select
-          options={avaliacoes.map((option, i) => {
-            return <option key={i}>{option.created_at}</option>
+          options={avaliacoes.map((avaliacao, i) => {
+            return (
+              <option key={i}>
+                {dateFormatter(avaliacao.created_at)} -{" "}
+                {dateFormatter(avaliacao.vencimento)}
+              </option>
+            )
           })}
           label="Período"
         />
@@ -89,7 +87,8 @@ export function Profile() {
             type="body"
             variant="md"
           >
-            Fim do acompanhamento atual: {fimAcompanhamento}
+            Fim do acompanhamento atual:{" "}
+            {dateFormatter(ultimaAvaliacao.vencimento)}
           </Typography>
         )}
       </div>
