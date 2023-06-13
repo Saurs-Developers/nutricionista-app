@@ -7,6 +7,7 @@ import * as z from "zod"
 import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
+import { useAuth } from "@/hooks/useAuth"
 import { useUserLogin } from "@/hooks/useUserLogin"
 import { loginSchema } from "@/schemas/login"
 
@@ -14,6 +15,7 @@ type LoginProps = z.infer<typeof loginSchema>
 
 export function Login() {
   const navigate = useNavigate()
+  const { isLoggedIn } = useAuth()
 
   const {
     register,
@@ -41,6 +43,10 @@ export function Login() {
       navigate("/")
     }
   }, [isSuccess])
+
+  if (isLoggedIn) {
+    navigate("/")
+  }
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">

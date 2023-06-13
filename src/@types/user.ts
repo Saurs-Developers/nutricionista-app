@@ -1,3 +1,5 @@
+import { PaginatedResponse } from "./base"
+
 export interface Alimento {
   id: string
   nome: string
@@ -93,6 +95,7 @@ export interface Treino {
 export interface Avaliacoes {
   id: string
   vencimento: string
+  objetivo: string
   fotos?: any
   plano: string
   peso: number
@@ -125,6 +128,16 @@ export interface Avaliacoes {
   updated_at: string
 }
 
+export interface Recipe {
+  id: string
+  titulo: string
+  descricao: string
+  created_at: string
+  updated_at: string
+}
+
+export interface RecipeResponse extends PaginatedResponse<Recipe> {}
+
 export interface IUserData {
   id: string
   nome: string
@@ -134,8 +147,7 @@ export interface IUserData {
   cidade: string
   notas: string
   contato: string
-  objetivo: string
   avaliacoes: Avaliacoes[]
-  receitas: any[]
+  receitas: Recipe[]
   data_nascimento: string
 }

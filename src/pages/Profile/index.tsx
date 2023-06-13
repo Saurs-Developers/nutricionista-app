@@ -1,20 +1,26 @@
-import { DateTime } from "luxon"
 import { FilePdf } from "phosphor-react"
 
+import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"
 import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
 import { useUserData } from "@/hooks/useUserData"
-import { calculateAge } from "@/utils/formatDateDistance"
-
-const options = ["21/03 -  21/05", "21/05 -  21/07"]
+import { calculateAge } from "@/utils/calculateAge"
 
 export function Profile() {
-  const { avaliacoes, nome, data_nascimento } = useUserData()
+  const { data, isLoading } = useUserData()
 
-  const latestAvaliacao = avaliacoes[avaliacoes.length - 1]
+  const { nome, avaliacoes, data_nascimento } = data as IUserData
 
-  const birthDate = DateTime.fromISO(new Date(data_nascimento).toISOString())
+  const ultimaAvaliacao = avaliacoes[0]
+
+  const date = new Date(ultimaAvaliacao.vencimento)
+  const fimAcompanhamento = date.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    timeZone: "UTC",
+  })
 
   return (
     <div>
@@ -35,7 +41,7 @@ export function Profile() {
               className="rounded-full"
               width={56}
               height={56}
-              src="https://github.com/JefteMedeiros.png"
+              src="/user.svg"
               alt=""
             />
           </div>
@@ -52,8 +58,9 @@ export function Profile() {
               variant="xxs"
               type="heading"
             >
-              {calculateAge("15/12/2003")}
-              anos, {latestAvaliacao?.peso}kg, {latestAvaliacao.altura}m
+              {calculateAge(data_nascimento)} anos
+              {ultimaAvaliacao &&
+                `, ${ultimaAvaliacao?.peso}kg, ${ultimaAvaliacao.altura}m`}
             </Typography>
           </div>
         </section>
@@ -62,21 +69,29 @@ export function Profile() {
         <Typography className="text-neutral-700" type="body" variant="xl">
           Avaliação antropométrica
         </Typography>
-        <Typography className="text-neutral-700" variant="xxs" type="heading">
-          Objetivo: Ganhar massa e perder gordura
-        </Typography>
+        {ultimaAvaliacao.objetivo && (
+          <Typography className="text-neutral-700" variant="xxs" type="heading">
+            Objetivo: Ganhar massa e perder gordura
+          </Typography>
+        )}
         <Select
-          options={options.map((option, i) => {
-            return <option key={i}>{option}</option>
+          options={avaliacoes.map((option, i) => {
+            return <option key={i}>{option.created_at}</option>
           })}
           label="Período"
         />
         <Button variant="filled">
           Exportar em PDF <FilePdf size={24} />
         </Button>
-        <Typography className="text-neutral-600 mt-6" type="body" variant="md">
-          Fim do acompanhamento atual: 21/05
-        </Typography>
+        {ultimaAvaliacao.vencimento && (
+          <Typography
+            className="text-neutral-600 mt-6"
+            type="body"
+            variant="md"
+          >
+            Fim do acompanhamento atual: {fimAcompanhamento}
+          </Typography>
+        )}
       </div>
       <img className="w-56 m-auto mt-4" src="athletics.png" alt="" />
     </div>

@@ -1,32 +1,23 @@
 import { Outlet } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
 import { Chat, House, Info, Person } from "phosphor-react"
 
-import { apiPrivate } from "@/api/api"
-import { Fallback } from "@/components/Fallback"
 import { useAuth } from "@/hooks/useAuth"
+import { UserDataProvider } from "@/hooks/useUserData"
 
 import { CustomLink } from "../components/CustomLink"
 import { Typography } from "../components/Typography"
 
 export function Layout() {
-  const { isLoggedIn, userInfo } = useAuth()
-
-  const id = userInfo?.user_id
-
-  const { data: res, isLoading } = useQuery({
-    queryKey: ["userInfo"],
-    queryFn: () => apiPrivate.get(`/v1/clientes/${id}`),
-  })
+  const { isLoggedIn } = useAuth()
 
   if (!isLoggedIn) return null
-
-  if (isLoading) return <Fallback />
 
   return (
     <div className="flex flex-col h-screen">
       <main className="max-h-full overflow-auto flex-1 px-4 py-8">
-        {<Outlet context={res!.data} />}
+        <UserDataProvider>
+          <Outlet />
+        </UserDataProvider>
       </main>
       <footer className="border-t-2 border-brand-primary">
         <nav className="flex items-center justify-between p-2 text-neutral-600">

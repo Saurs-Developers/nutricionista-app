@@ -10,7 +10,7 @@ const queryClient = new QueryClient({
       // REMOVER EM PRODUÇÃO (retry false)
       retry: false,
       refetchOnWindowFocus: false,
-      cacheTime: 60 * 60 * 1000,
+      cacheTime: 1000 * 60 * 60 * 24,
     },
   },
 })
