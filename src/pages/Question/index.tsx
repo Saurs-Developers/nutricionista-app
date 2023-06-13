@@ -27,11 +27,6 @@ export function Question() {
         ingerir bebidas alcoólicas, mas uma cevejinha no final de semana tá
         liberado!
       </Typography>
-      <img
-        className="w-56 m-auto object-cover rounded-t-lg"
-        src="faq.png"
-        alt=""
-      />
     </div>
   )
 }

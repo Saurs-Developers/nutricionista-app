@@ -93,7 +93,6 @@ export function Profile() {
           </Typography>
         )}
       </div>
-      <img className="w-56 m-auto mt-4" src="athletics.png" alt="" />
     </div>
   )
 }

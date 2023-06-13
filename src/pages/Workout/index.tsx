@@ -6,6 +6,7 @@ import { Exercicio } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
+import { LazyLoading } from "@/components/Card/LazyLoading"
 import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 
@@ -21,6 +22,8 @@ export function Workout() {
 
   const treinos: Exercicio[] = res?.data.results
 
+  const hasWorkouts = !isLoading && treinos!.length > 0
+
   return (
     <div>
       <header className="flex items-center gap-4">
@@ -33,7 +36,13 @@ export function Workout() {
         Treino A Quadríceps
       </Typography>
       <div className="flex flex-col gap-6 snap-y">
-        {!isLoading &&
+        {isLoading ? (
+          <div className="flex flex-col gap-4">
+            <LazyLoading />
+            <LazyLoading />
+            <LazyLoading />
+          </div>
+        ) : hasWorkouts ? (
           treinos.map((exercicio, key) => {
             return (
               <Card
@@ -62,7 +71,12 @@ export function Workout() {
                 }
               />
             )
-          })}
+          })
+        ) : (
+          <Typography variant="md" type="body">
+            Nenhum exercício adicionado
+          </Typography>
+        )}
       </div>
     </div>
   )
