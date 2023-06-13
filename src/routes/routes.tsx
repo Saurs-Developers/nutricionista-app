@@ -67,11 +67,11 @@ export const routesConfig: RouteObject[] = [
         element: <Faq />,
       },
       {
-        path: "workout",
+        path: "workout/:id",
         element: <Workout />,
       },
       {
-        path: "diet",
+        path: "diet/:id",
         element: <Diet />,
       },
       {

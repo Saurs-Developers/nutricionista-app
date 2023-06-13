@@ -1,12 +1,20 @@
 import { FilePdf } from "phosphor-react"
 
+import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"
 import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
-
-const options = ["21/03 -  21/05", "21/05 -  21/07"]
+import { useUserData } from "@/hooks/useUserData"
+import { calculateAge } from "@/utils/calculateAge"
+import { dateFormatter } from "@/utils/dateFormatter"
 
 export function Profile() {
+  const { data } = useUserData()
+
+  const { nome, avaliacoes, data_nascimento } = data as IUserData
+
+  const ultimaAvaliacao = avaliacoes[0]
+
   return (
     <div>
       <header>
@@ -26,7 +34,7 @@ export function Profile() {
               className="rounded-full"
               width={56}
               height={56}
-              src="https://github.com/JefteMedeiros.png"
+              src="/user.svg"
               alt=""
             />
           </div>
@@ -36,14 +44,16 @@ export function Profile() {
               variant="xxs"
               type="heading"
             >
-              Jefté Medeiros
+              {nome}
             </Typography>
             <Typography
               className="text-neutral-600"
               variant="xxs"
               type="heading"
             >
-              19 anos, 83kg, 1.83m
+              {calculateAge(data_nascimento)} anos
+              {ultimaAvaliacao &&
+                `, ${ultimaAvaliacao?.peso}kg, ${ultimaAvaliacao.altura}m`}
             </Typography>
           </div>
         </section>
@@ -52,23 +62,36 @@ export function Profile() {
         <Typography className="text-neutral-700" type="body" variant="xl">
           Avaliação antropométrica
         </Typography>
-        <Typography className="text-neutral-700" variant="xxs" type="heading">
-          Objetivo: Ganhar massa e perder gordura
-        </Typography>
+        {ultimaAvaliacao.objetivo && (
+          <Typography className="text-neutral-700" variant="xxs" type="heading">
+            Objetivo: Ganhar massa e perder gordura
+          </Typography>
+        )}
         <Select
-          options={options.map((option, i) => {
-            return <option key={i}>{option}</option>
+          options={avaliacoes.map((avaliacao, i) => {
+            return (
+              <option key={i}>
+                {dateFormatter(avaliacao.created_at)} -{" "}
+                {dateFormatter(avaliacao.vencimento)}
+              </option>
+            )
           })}
           label="Período"
         />
         <Button variant="filled">
           Exportar em PDF <FilePdf size={24} />
         </Button>
-        <Typography className="text-neutral-600 mt-6" type="body" variant="md">
-          Fim do acompanhamento atual: 21/05
-        </Typography>
+        {ultimaAvaliacao.vencimento && (
+          <Typography
+            className="text-neutral-600 mt-6"
+            type="body"
+            variant="md"
+          >
+            Fim do acompanhamento atual:{" "}
+            {dateFormatter(ultimaAvaliacao.vencimento)}
+          </Typography>
+        )}
       </div>
-      <img className="w-56 m-auto mt-4" src="athletics.png" alt="" />
     </div>
   )
 }

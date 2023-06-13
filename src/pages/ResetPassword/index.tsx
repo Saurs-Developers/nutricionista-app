@@ -29,7 +29,6 @@ export function ResetPassword() {
 
   const onSubmit = async (formData: ResetPasswordProps) => {
     reset({ password: formData.password_confirmation })
-    console.log(formData)
   }
 
   useEffect(() => {

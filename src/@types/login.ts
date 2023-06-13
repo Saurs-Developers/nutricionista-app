@@ -1,12 +1,9 @@
-export interface LoginBody {
+import { BaseUserInfo } from "./base"
+
+export interface LoginBody extends BaseUserInfo {
   email: string
-  password: string
 }
 
-export interface ResetPasswordBody {
-  password: string
-}
+export interface ResetPasswordBody extends BaseUserInfo {}
 
-export interface FirstAccessBody {
-  password: string
-}
+export interface FirstAccessBody extends BaseUserInfo {}
