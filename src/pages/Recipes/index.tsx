@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
-import { ArrowLeft, Pencil } from "phosphor-react"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { ArrowLeft } from "phosphor-react"
 
 import { ReceitaResponse } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
-import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { LazyLoading } from "@/components/Card/LazyLoading"
-import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 import { useAuth } from "@/hooks/useAuth"
 
+import { CreateRecipeAlert } from "./CreateRecipeAlert"
 import { DeleteRecipeAlert } from "./DeleteRecipeAlert"
 import { EditRecipeAlert } from "./EditRecipeAlert"
 
@@ -33,16 +32,16 @@ export function Recipes() {
 
   return (
     <div>
-      <header className="flex items-center gap-4">
+      <header className="flex items-center gap-4 mb-6">
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
-        <Input placeholder="Pesquisar" searchIcon />
+        <Typography as="h2" type="heading" variant="xs">
+          Minhas receitas
+        </Typography>
       </header>
-      <Typography as="h2" className="my-6" type="heading" variant="xs">
-        Minhas receitas
-      </Typography>
-      <div className="flex flex-col gap-6">
+      <CreateRecipeAlert />
+      <div className="flex flex-col gap-6 mt-8">
         {isLoading ? (
           <div className="flex flex-col gap-4">
             <LazyLoading />
@@ -62,8 +61,11 @@ export function Recipes() {
                 }
                 action={
                   <>
-                    <DeleteRecipeAlert />
-                    <EditRecipeAlert />
+                    <DeleteRecipeAlert id={receita.id} />
+                    <EditRecipeAlert
+                      title={receita.titulo}
+                      description={receita.descricao}
+                    />
                   </>
                 }
               />

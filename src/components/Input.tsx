@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, InputHTMLAttributes } from "react"
+import { forwardRef, InputHTMLAttributes } from "react"
 import { MagnifyingGlass } from "phosphor-react"
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,7 +23,7 @@ export const Input = forwardRef<InputRef, InputProps>(
             {label}
           </label>
         )}
-        <div className="flex items-center justify-between gap-2 border-2 h-12 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
+        <div className="flex items-center justify-between gap-2 border-2 h-10 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
           <input
             {...props}
             id={id}
