@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import * as z from "zod"
@@ -14,15 +15,23 @@ import { Button } from "@/components/Button"
 import { Input } from "@/components/Input"
 import { TextArea } from "@/components/TextArea"
 import { useAuth } from "@/hooks/useAuth"
+import { recipeSchema } from "@/schemas/recipe"
 
 export function CreateRecipeAlert() {
   const queryClient = useQueryClient()
 
+  type RecipeBody = z.infer<typeof recipeSchema>
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+  } = useForm<RecipeBody>({
+    resolver: zodResolver(recipeSchema),
+    mode: "onChange",
+  })
+
   const { userInfo } = useAuth()
-
-  type RecipeBody = z.infer<typeof createRecipeSchema>
-
-  const { handleSubmit, register } = useForm<RecipeBody>()
 
   const [open, setOpen] = useState(false)
 
@@ -46,22 +55,32 @@ export function CreateRecipeAlert() {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <form
-          id="batata"
+          id="create_recipe"
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-2"
         >
           <Input
+            error={errors.titulo?.message}
             {...register("titulo")}
             label="Título"
             placeholder="Ex: vitamina de whey"
           />
-          <TextArea {...register("descricao")} label="Descrição" />
+          <TextArea
+            error={errors.descricao?.message}
+            {...register("descricao")}
+            label="Descrição"
+          />
         </form>
         <div className="flex justify-between gap-4 mt-4">
           <AlertDialogCancel asChild>
             <Button variant="outlined">Cancelar</Button>
           </AlertDialogCancel>
-          <Button form="batata" type="submit" variant="filled">
+          <Button
+            disabled={!isValid}
+            form="create_recipe"
+            type="submit"
+            variant="filled"
+          >
             Salvar
           </Button>
         </div>
@@ -69,8 +88,3 @@ export function CreateRecipeAlert() {
     </AlertDialog>
   )
 }
-
-const createRecipeSchema = z.object({
-  titulo: z.string().min(3).max(255),
-  descricao: z.string().min(3).max(255),
-})

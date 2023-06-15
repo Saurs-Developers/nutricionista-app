@@ -2,7 +2,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@radix-ui/react-alert-dialog"
-import { QueryClient, useMutation } from "@tanstack/react-query"
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { apiPrivate } from "@/api/api"
 import {
@@ -14,7 +14,7 @@ import { Button } from "@/components/Button"
 import { Typography } from "@/components/Typography"
 
 export function DeleteRecipeAlert({ id }: { id: string }) {
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
     mutationFn: (id: string) => apiPrivate.delete(`/v1/receitas/${id}`),
@@ -42,9 +42,6 @@ export function DeleteRecipeAlert({ id }: { id: string }) {
             </Button>
           </AlertDialogAction>
         </div>
-        <button onClick={() => console.log(`/api/v1/receitas/${id}`)}>
-          asdfasd
-        </button>
       </AlertDialogContent>
     </AlertDialog>
   )

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft } from "phosphor-react"
 
 import { ReceitaResponse } from "@/@types/user"
@@ -63,6 +63,7 @@ export function Recipes() {
                   <>
                     <DeleteRecipeAlert id={receita.id} />
                     <EditRecipeAlert
+                      id={receita.id}
                       title={receita.titulo}
                       description={receita.descricao}
                     />
