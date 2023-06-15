@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, redirect } from "react-router-dom"
 import { Chat, House, Info, Person } from "phosphor-react"
 
 import { useAuth } from "@/hooks/useAuth"
@@ -8,10 +8,6 @@ import { CustomLink } from "../components/CustomLink"
 import { Typography } from "../components/Typography"
 
 export function Layout() {
-  const { isLoggedIn } = useAuth()
-
-  if (!isLoggedIn) return null
-
   return (
     <div className="flex flex-col h-screen">
       <main className="max-h-full overflow-auto flex-1 px-4 py-8">

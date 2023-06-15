@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -15,7 +15,6 @@ type LoginProps = z.infer<typeof loginSchema>
 
 export function Login() {
   const navigate = useNavigate()
-  const { isLoggedIn } = useAuth()
 
   const {
     register,
@@ -44,10 +43,6 @@ export function Login() {
     }
   }, [isSuccess])
 
-  if (isLoggedIn) {
-    navigate("/")
-  }
-
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
       <Typography type="heading" variant="sm">
@@ -71,9 +66,7 @@ export function Login() {
           error={errors.password?.message as string}
           placeholder="********"
         />
-        <Button disabled={isLoading} variant="filled">
-          Entrar
-        </Button>
+        <Button variant={isLoading ? "loading" : "filled"}>Entrar</Button>
         {isError && (
           <span className="text-red-500">Usuário ou senha incorretos.</span>
         )}

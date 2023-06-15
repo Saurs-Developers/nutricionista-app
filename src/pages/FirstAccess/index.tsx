@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { Navigate, redirect, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -13,8 +13,6 @@ import { resetPasswordSchema } from "@/schemas/resetPassword"
 export type FirstAccessProps = z.infer<typeof resetPasswordSchema>
 
 export function FirstAccess() {
-  const navigate = useNavigate()
-
   const {
     register,
     handleSubmit,
@@ -37,12 +35,16 @@ export function FirstAccess() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/login")
+      redirect("/login")
       localStorage.removeItem("first-access-token")
     } else if (isError) {
       localStorage.removeItem("first-access-token")
     }
   }, [isSuccess, isError])
+
+  if (!localStorage.getItem("first-access-token")) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import jwt_decode from "jwt-decode"
 
 interface IJwt {
@@ -11,10 +10,18 @@ interface IJwt {
 }
 
 export const useAuth = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-  const [userInfo, setUserInfo] = useState<IJwt>(() => {
-    const access_token = localStorage.getItem("access-token")
+  const access_token = localStorage.getItem("access-token")
+  const refresh_token = localStorage.getItem("refresh-token")
 
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    if (refresh_token) {
+      return true
+    }
+
+    return false
+  })
+
+  const [userInfo, setUserInfo] = useState<IJwt>(() => {
     if (access_token) {
       const tokenInfo: IJwt = jwt_decode(access_token)
       return tokenInfo
@@ -23,22 +30,9 @@ export const useAuth = () => {
     return {} as IJwt
   })
 
-  const navigate = useNavigate()
-
-  const checkUserLogin = () => {
-    const refresh_token = localStorage.getItem("refresh-token")
-
-    if (!refresh_token) {
-      setIsLoggedIn(false)
-      navigate("/login")
-    } else {
-      setIsLoggedIn(true)
-    }
-  }
-
   useEffect(() => {
-    checkUserLogin()
-  }, [isLoggedIn])
+    console.log(isLoggedIn)
+  }, [])
 
   const logout = () => {
     localStorage.removeItem("refresh-token")

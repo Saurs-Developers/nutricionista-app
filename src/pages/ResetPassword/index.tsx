@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { redirect, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "phosphor-react"
 import * as z from "zod"
@@ -17,10 +17,6 @@ export type ResetPasswordProps = z.infer<typeof resetPasswordSchema>
 export function ResetPassword() {
   const { isLoggedIn } = useAuth()
   const navigate = useNavigate()
-
-  if (isLoggedIn) {
-    navigate("/")
-  }
 
   const { mutate: reset, isLoading, isSuccess, isError } = useResetPassword()
 
@@ -87,7 +83,7 @@ export function ResetPassword() {
               error={errors.password_confirmation?.message as string}
               placeholder="********"
             />
-            <Button disabled={isLoading} variant="filled">
+            <Button variant={isLoading ? "loading" : "filled"}>
               Alterar senha
             </Button>
           </>

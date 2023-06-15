@@ -15,12 +15,7 @@ import { useAuth } from "@/hooks/useAuth"
 export type SendEmailProps = z.infer<typeof sendEmailSchema>
 
 export function ResetPasswordEmail() {
-  const { isLoggedIn } = useAuth()
   const navigate = useNavigate()
-
-  if (isLoggedIn) {
-    navigate("/")
-  }
 
   const {
     mutate: sendEmail,
@@ -72,11 +67,18 @@ export function ResetPasswordEmail() {
       >
         <img className="mb-8" src="logo.png" alt="" />
         {isEmailSent ? (
-          <Typography className="self-start" as="h2" variant="lg" type="body">
-            Um e-mail de confirmação de senha foi enviado para{" "}
-            <b>{getValues("email")}. </b>
-            Por favor, verifique sua caixa de entrada.
-          </Typography>
+          <>
+            <Typography className="self-start" as="p" variant="lg" type="body">
+              Um e-mail de confirmação de senha foi enviado para o e-mail
+              solicitado. Por favor, verifique sua caixa de entrada.
+            </Typography>
+            <Typography className="self-start" as="p" variant="lg" type="body">
+              <b>({getValues("email")})</b>
+            </Typography>
+            <Typography className="self-start" as="p" variant="lg" type="body">
+              Por favor, verifique sua caixa de entrada.
+            </Typography>
+          </>
         ) : (
           <>
             <Typography className="self-start" as="h2" variant="lg" type="body">
@@ -88,7 +90,7 @@ export function ResetPasswordEmail() {
               error={errors.email?.message as string}
               placeholder="name@example.com"
             />
-            <Button disabled={isLoading} variant="filled">
+            <Button variant={isLoading ? "loading" : "filled"}>
               Enviar e-mail
             </Button>
           </>

@@ -1,6 +1,5 @@
+import { redirect } from "react-router-dom"
 import axios from "axios"
-
-import { router } from "@/App"
 
 export const baseURL = import.meta.env.VITE_BASE_URL
 
@@ -67,7 +66,7 @@ apiPrivate.interceptors.response.use(
 
           return apiPrivate(originalConfig)
         } catch (e) {
-          router.navigate("/login")
+          redirect("/login")
           localStorage.removeItem("access-token")
           localStorage.removeItem("refresh-token")
 

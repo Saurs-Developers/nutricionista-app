@@ -1,5 +1,6 @@
-import { RouteObject } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
+import { useAuth } from "@/hooks/useAuth"
 import { NotFound } from "@/pages/404"
 import { Chat } from "@/pages/Chat"
 import { Diet } from "@/pages/Diet"
@@ -18,70 +19,37 @@ import { Workout } from "@/pages/Workout"
 
 import { Layout } from "../layout/index"
 
-export const routesConfig: RouteObject[] = [
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-  {
-    path: "error",
-    element: <Error />,
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "reset-password-email",
-    element: <ResetPasswordEmail />,
-  },
-  {
-    path: "reset-password-fallback",
-    element: <ResetPasswordFallback />,
-  },
-  {
-    path: "reset-password/",
-    element: <ResetPassword />,
-  },
-  {
-    path: "first-access",
-    element: <FirstAccess />,
-  },
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "chat",
-        element: <Chat />,
-      },
-      {
-        path: "profile",
-        element: <Profile />,
-      },
-      {
-        path: "faq",
-        element: <Faq />,
-      },
-      {
-        path: "workout/:id",
-        element: <Workout />,
-      },
-      {
-        path: "diet/:id",
-        element: <Diet />,
-      },
-      {
-        path: "question",
-        element: <Question />,
-      },
-      {
-        path: "recipes",
-        element: <Recipes />,
-      },
-    ],
-  },
-]
+export function AppRoutes() {
+  const { isLoggedIn } = useAuth()
+
+  return (
+    <Routes>
+      <Route path="*" element={<NotFound />} />
+      <Route path="error" element={<Error />} />
+      <Route path="login" element={!isLoggedIn ? <Login /> : <Home />} />
+      <Route
+        path="reset-password-email"
+        element={!isLoggedIn ? <ResetPasswordEmail /> : <Home />}
+      />
+      <Route
+        path="reset-password-fallback"
+        element={<ResetPasswordFallback />}
+      />
+      <Route
+        path="reset-password/"
+        element={!isLoggedIn ? <ResetPassword /> : <Home />}
+      />
+      <Route path="first-access" element={<FirstAccess />} />
+      <Route path="/" element={isLoggedIn ? <Layout /> : <Login />}>
+        <Route path="/" element={<Home />} />
+        <Route path="chat" element={<Chat />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="faq" element={<Faq />} />
+        <Route path="workout/:id" element={<Workout />} />
+        <Route path="diet/:id" element={<Diet />} />
+        <Route path="question" element={<Question />} />
+        <Route path="recipes" element={<Recipes />} />
+      </Route>
+    </Routes>
+  )
+}

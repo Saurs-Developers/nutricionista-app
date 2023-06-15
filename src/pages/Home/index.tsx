@@ -1,7 +1,6 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
 
 import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"

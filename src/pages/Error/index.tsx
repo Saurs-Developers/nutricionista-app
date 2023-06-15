@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 import { Typography } from "@/components/Typography"
 
@@ -18,10 +18,18 @@ export function Error() {
 
   return (
     <div className="px-[1rem] py-[2rem] h-screen w-screen flex flex-col items-center justify-center">
-      <img className="w-72" src="../../no_data.png" alt="" />
-      <Typography className="text-center" type="body" variant="xl">
-        Erro! {errorMeanings[reason]}
+      <img src="/logo.png" className="mb-4" alt="" />
+      <Typography className="text-center text-danger" type="body" variant="xl">
+        Um Erro foi encontrado.
       </Typography>
+      <Typography className="text-center mt-3" type="body" variant="lg">
+        Código: {errorMeanings[reason]}
+      </Typography>
+      <Link className="text-underline mt-4" to={"/"}>
+        <Typography className="underline" type="body" variant="md">
+          Ir para a home
+        </Typography>
+      </Link>
     </div>
   )
 }
