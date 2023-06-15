@@ -1,8 +1,8 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface Water {
   amount: number
-  date: Date
+  date: number
 }
 
 export const useWaterConsumption = () => {
@@ -10,36 +10,44 @@ export const useWaterConsumption = () => {
     localStorage.getItem("waterConsumption")!,
   )
 
+  const [currentAmount, setCurrentAmount] = useState(() => {
+    if (waterConsumption) {
+      return waterConsumption.amount
+    }
+
+    return 0
+  })
+
   useEffect(() => {
-    if (!waterConsumption || waterConsumption.date < new Date()) {
+    if (!waterConsumption) {
       localStorage.setItem(
         "waterConsumption",
-        JSON.stringify({ amount: 0, date: new Date() }),
+        JSON.stringify({ amount: 0, date: new Date().getDate() }),
       )
     }
 
-    if (
-      waterConsumption &&
-      new Date(waterConsumption.date).getDay() < new Date().getDay()
-    ) {
+    if (waterConsumption && waterConsumption.date < new Date().getDate()) {
       localStorage.setItem(
         "waterConsumption",
-        JSON.stringify({ amount: 0, date: new Date() }),
+        JSON.stringify({ amount: 0, date: new Date().getDate() }),
       )
+      setCurrentAmount(0)
     }
   }, [waterConsumption])
 
   const addWater = (amount: number) => {
     const updatedWaterConsumption = {
       amount: amount,
-      date: new Date(),
+      date: waterConsumption.date,
     }
 
     localStorage.setItem(
       "waterConsumption",
       JSON.stringify(updatedWaterConsumption),
     )
+
+    setCurrentAmount(amount)
   }
 
-  return { addWater }
+  return { addWater, currentAmount, setCurrentAmount }
 }

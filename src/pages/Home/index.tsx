@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 
 import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
-import { LazyLoading } from "@/components/Card/LazyLoading"
-import { Dialog } from "@/components/Dialog"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/Dialog"
 import { Input } from "@/components/Input"
 import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
@@ -13,29 +14,29 @@ import { useUserData } from "@/hooks/useUserData"
 import { useWaterConsumption } from "@/hooks/useWaterConsumption"
 import { weekdayChooser, WeekDays } from "@/utils/weekdaychooser"
 
+interface Water {
+  water: string
+}
+
 export function Home() {
   const { data } = useUserData()
-  const { addWater } = useWaterConsumption()
+  const { addWater, currentAmount } = useWaterConsumption()
+  const { register, handleSubmit, watch, reset } = useForm<Water>()
+
+  const waterInput = watch("water")
 
   const { nome, avaliacoes } = data as IUserData
 
   const treinos = avaliacoes[0]?.treinos
   const dietas = avaliacoes[0]?.dietas
 
-  const [updatedAmount, setCurrentAmount] = useState(() => {
-    const waterConsumption = localStorage.getItem("waterConsumption")
+  const onSubmit = (data: Water) => {
+    addWater(currentAmount + Number(data.water))
+    setOpen(false)
+    reset()
+  }
 
-    if (waterConsumption) {
-      const { amount } = JSON.parse(waterConsumption)
-      return amount
-    }
-
-    return 0
-  })
-
-  useEffect(() => {
-    addWater(updatedAmount)
-  }, [updatedAmount])
+  const [open, setOpen] = useState(false)
 
   return (
     <div>
@@ -86,7 +87,6 @@ export function Home() {
             </div>
           </section>
         )}
-
         {/* Dietas */}
         {dietas && (
           <section>
@@ -127,7 +127,6 @@ export function Home() {
             </Link>
           </section>
         )}
-
         <section className="space-y-4">
           <header>
             <Typography
@@ -138,18 +137,44 @@ export function Home() {
               Consumo diário de água
             </Typography>
             <Typography className="text-neutral-600" variant="sm" type="body">
-              Meta: {updatedAmount}ml/3000ml
+              Meta: {currentAmount}ml/3000ml
             </Typography>
           </header>
-          <ProgressBar value={updatedAmount / 30} />
-          <Dialog trigger="Registrar consumo de água" close="Adicionar">
-            <Input
-              maxLength={4}
-              max={3000}
-              onChange={(e) => setCurrentAmount(Number(e.target.value))}
-              placeholder="Ex: 1000ml"
-            />
+          <ProgressBar value={currentAmount / 30} />
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <Button disabled={3000 - currentAmount === 0} variant="filled">
+                Registrar consumo de água
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-4"
+              >
+                <Typography variant="sm" type="heading">
+                  Adicionar
+                </Typography>
+                <Typography variant="sm" type="body">
+                  {3000 - currentAmount > 0 &&
+                    `Faltam ${
+                      3000 - currentAmount
+                    }ml para bater sua meta diária de água`}
+                </Typography>
+                <Input {...register("water")} placeholder="Ex: 2000ml" />
+                <Button
+                  disabled={Number(waterInput) + currentAmount > 3000}
+                  variant="filled"
+                >
+                  Adicionar
+                </Button>
+              </form>
+            </DialogContent>
           </Dialog>
+          <Typography variant="md" type="body">
+            {3000 - currentAmount === 0 &&
+              "Você bateu sua meta diária de água! 🎆"}
+          </Typography>
         </section>
       </div>
     </div>

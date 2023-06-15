@@ -1,4 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react"
+import { Slot } from "@radix-ui/react-slot"
+import clsx from "clsx"
 import { CircleNotch } from "phosphor-react"
 
 const buttonVariants = {
@@ -19,34 +21,39 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "filled" | "outlined" | "danger" | "danger-outlined" | "loading"
   children: ReactNode
   className?: string
+  asChild?: boolean
 }
 
-export type ButtonRef = HTMLButtonElement
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant, children, className, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
 
-export const Button = forwardRef<ButtonRef, ButtonProps>(
-  ({ variant, children, className, ...props }: ButtonProps, ref) => {
     return variant === "loading" ? (
-      <button
-        {...props}
+      <Comp
         ref={ref}
         disabled
-        className={`${baseStyles} ${buttonVariants[variant!]} ${
-          className && className
-        }`}
+        className={clsx(
+          baseStyles,
+          buttonVariants[variant!],
+          className && className,
+        )}
+        {...props}
       >
         <CircleNotch className="animate-spin" />
         {children}
-      </button>
+      </Comp>
     ) : (
-      <button
-        {...props}
+      <Comp
         ref={ref}
-        className={`${baseStyles} ${buttonVariants[variant!]} ${
-          className && className
-        }`}
+        className={clsx(
+          baseStyles,
+          buttonVariants[variant!],
+          className && className,
+        )}
+        {...props}
       >
         {children}
-      </button>
+      </Comp>
     )
   },
 )
