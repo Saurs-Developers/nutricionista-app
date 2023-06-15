@@ -26,6 +26,7 @@ export const Input = forwardRef<InputRef, InputProps>(
         <div className="flex items-center justify-between gap-2 border-2 h-12 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
           <input
             {...props}
+            id={id}
             ref={ref}
             placeholder={placeholder}
             className="flex-1 outline-none"

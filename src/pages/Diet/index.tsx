@@ -39,6 +39,9 @@ export function Diet() {
       <Typography as="h2" className="my-6" type="heading" variant="xs">
         {!isLoading && dieta!.titulo}
       </Typography>
+      <Link to="/recipes">
+        <Button variant="filled">Acessar minhas receitas</Button>
+      </Link>
       <div className="flex flex-col gap-6 mt-8">
         {isLoading ? (
           <div className="flex flex-col gap-4">
@@ -53,10 +56,10 @@ export function Diet() {
                 key={key}
                 info={
                   <>
-                    <div className="flex justify-between items-center w-full">
-                      <Card.Title>{refeicao.titulo}</Card.Title>
-                      <Pencil className="text-brand-primary" size={20} />
-                    </div>
+                    <Card.Title>{refeicao.titulo}</Card.Title>
+                    <Card.Subtitle>
+                      {refeicao.horario_inicio + " - " + refeicao.horario_fim}
+                    </Card.Subtitle>
                     {refeicao.itens.map((item, key) => {
                       return (
                         <div key={key}>
@@ -71,12 +74,6 @@ export function Diet() {
                     })}
                   </>
                 }
-                action={
-                  <>
-                    <Button variant="outlined">Excluir</Button>
-                    <Button variant="filled">Editar</Button>
-                  </>
-                }
               />
             )
           })
@@ -85,9 +82,6 @@ export function Diet() {
             Nenhuma refeição foi encontrada.
           </Typography>
         )}
-        <Link to="/recipes">
-          <Button variant="filled">Acessar minhas receitas</Button>
-        </Link>
       </div>
     </div>
   )

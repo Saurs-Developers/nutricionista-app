@@ -11,6 +11,9 @@ import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 import { useAuth } from "@/hooks/useAuth"
 
+import { DeleteRecipeAlert } from "./DeleteRecipeAlert"
+import { EditRecipeAlert } from "./EditRecipeAlert"
+
 export function Recipes() {
   let navigate = useNavigate()
 
@@ -53,17 +56,14 @@ export function Recipes() {
                 key={key}
                 info={
                   <>
-                    <div className="flex justify-between items-center w-full">
-                      <Card.Title>{receita.titulo}</Card.Title>
-                      <Pencil className="text-brand-primary" size={20} />
-                    </div>
+                    <Card.Title>{receita.titulo}</Card.Title>
                     <Card.Description>{receita.descricao}</Card.Description>
                   </>
                 }
                 action={
                   <>
-                    <Button variant="outlined">Excluir</Button>
-                    <Button variant="filled">Editar</Button>
+                    <DeleteRecipeAlert />
+                    <EditRecipeAlert />
                   </>
                 }
               />

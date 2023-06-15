@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react"
 import * as DialogComponent from "@radix-ui/react-dialog"
 import clsx from "clsx"
-import { X } from "phosphor-react"
 
 const Dialog = DialogComponent.Root
 
@@ -33,7 +32,7 @@ const DialogContent = forwardRef<
         }}
         className={clsx(
           className,
-          "bg-white rounded-lg shadow-md fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[calc(100vw-32px)] w-full p-4",
+          "bg-white rounded-lg shadow-md fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-[calc(100vw-48px)] min-h-[10rem] w-full p-4",
         )}
         ref={ref}
         {...props}
