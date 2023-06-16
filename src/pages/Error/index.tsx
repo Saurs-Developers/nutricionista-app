@@ -7,6 +7,7 @@ const errorMeanings = {
     "O tempo para utilizar este link já expirou, você precisa solicitar outro.",
   "token-not-found": "Link inválido.",
   "used-token": "Link já utilizado, você precisa solicitar outro.",
+  null: "Erro desconhecido",
 }
 
 type ErrorReason = keyof typeof errorMeanings

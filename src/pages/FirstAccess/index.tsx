@@ -55,7 +55,7 @@ export function FirstAccess() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-32 flex-1 flex flex-col gap-4 items-center"
       >
-        <img className="mb-8" src="logo.png" alt="" />
+        <img className="mb-8" src="/logo.png" alt="" />
         <Typography as="h2" variant="lg" type="body">
           Bem vindo! Para começar, crie uma nova senha.
         </Typography>

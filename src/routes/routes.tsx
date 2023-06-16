@@ -22,6 +22,8 @@ import { Layout } from "../layout/index"
 export function AppRoutes() {
   const { isLoggedIn } = useAuth()
 
+  const first_access = localStorage.getItem("first_access")
+
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
@@ -39,7 +41,10 @@ export function AppRoutes() {
         path="reset-password/"
         element={!isLoggedIn ? <ResetPassword /> : <Home />}
       />
-      <Route path="first-access" element={<FirstAccess />} />
+      <Route
+        path="first-access"
+        element={first_access ? <FirstAccess /> : <Home />}
+      />
       <Route path="/" element={isLoggedIn ? <Layout /> : <Login />}>
         <Route path="/" element={<Home />} />
         <Route path="chat" element={<Chat />} />
