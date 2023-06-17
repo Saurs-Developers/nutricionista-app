@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 
 import { useAuth } from "@/hooks/useAuth"
 import { NotFound } from "@/pages/404"
@@ -28,10 +28,13 @@ export function AppRoutes() {
     <Routes>
       <Route path="*" element={<NotFound />} />
       <Route path="error" element={<Error />} />
-      <Route path="login" element={!isLoggedIn ? <Login /> : <Home />} />
+      <Route
+        path="login"
+        element={!isLoggedIn ? <Login /> : <Navigate to="/" />}
+      />
       <Route
         path="reset-password-email"
-        element={!isLoggedIn ? <ResetPasswordEmail /> : <Home />}
+        element={!isLoggedIn ? <ResetPasswordEmail /> : <Navigate to="/" />}
       />
       <Route
         path="reset-password-fallback"
@@ -39,13 +42,16 @@ export function AppRoutes() {
       />
       <Route
         path="reset-password/"
-        element={!isLoggedIn ? <ResetPassword /> : <Home />}
+        element={!isLoggedIn ? <ResetPassword /> : <Navigate to="/" />}
       />
       <Route
         path="first-access"
-        element={first_access ? <FirstAccess /> : <Home />}
+        element={first_access ? <FirstAccess /> : <Navigate to="/" />}
       />
-      <Route path="/" element={isLoggedIn ? <Layout /> : <Login />}>
+      <Route
+        path="/"
+        element={isLoggedIn ? <Layout /> : <Navigate to="/login" />}
+      >
         <Route path="/" element={<Home />} />
         <Route path="chat" element={<Chat />} />
         <Route path="profile" element={<Profile />} />

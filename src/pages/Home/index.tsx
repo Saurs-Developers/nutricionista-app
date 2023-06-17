@@ -2,14 +2,14 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
-import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/Dialog"
+import { Fallback } from "@/components/Fallback"
 import { Input } from "@/components/Input"
 import { ProgressBar } from "@/components/ProgressBar"
 import { Typography } from "@/components/Typography"
-import { useUserData } from "@/hooks/useUserData"
+import { useHomeInfo } from "@/hooks/useHomeInfo"
 import { useWaterConsumption } from "@/hooks/useWaterConsumption"
 import { weekdayChooser, WeekDays } from "@/utils/weekdaychooser"
 
@@ -18,16 +18,12 @@ interface Water {
 }
 
 export function Home() {
-  const { data } = useUserData()
+  const { isLoading, user, avaliacoes } = useHomeInfo()
+
   const { addWater, currentAmount } = useWaterConsumption()
   const { register, handleSubmit, watch, reset } = useForm<Water>()
 
   const waterInput = watch("water")
-
-  const { nome, avaliacoes } = data as IUserData
-
-  const treinos = avaliacoes[0]?.treinos
-  const dietas = avaliacoes[0]?.dietas
 
   const onSubmit = (data: Water) => {
     addWater(currentAmount + Number(data.water))
@@ -36,6 +32,14 @@ export function Home() {
   }
 
   const [open, setOpen] = useState(false)
+
+  if (isLoading) {
+    return <Fallback />
+  }
+
+  const ultimaAvaliacao = avaliacoes[0]
+  const treinos = ultimaAvaliacao.treinos
+  const dietas = ultimaAvaliacao.dietas
 
   return (
     <div>
@@ -46,7 +50,7 @@ export function Home() {
           variant="sm"
           type="heading"
         >
-          Olá, {nome}
+          Olá, {user!.nome}
         </Typography>
       </header>
       <div className="mt-5 space-y-4">

@@ -1,8 +1,5 @@
-import { Outlet, redirect } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { Chat, House, Info, Person } from "phosphor-react"
-
-import { useAuth } from "@/hooks/useAuth"
-import { UserDataProvider } from "@/hooks/useUserData"
 
 import { CustomLink } from "../components/CustomLink"
 import { Typography } from "../components/Typography"
@@ -11,9 +8,7 @@ export function Layout() {
   return (
     <div className="flex flex-col h-screen">
       <main className="max-h-full overflow-auto flex-1 px-4 py-8">
-        <UserDataProvider>
-          <Outlet />
-        </UserDataProvider>
+        <Outlet />
       </main>
       <footer className="border-t-2 border-brand-primary">
         <nav className="flex items-center justify-between p-2 text-neutral-600">

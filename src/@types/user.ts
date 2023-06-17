@@ -92,7 +92,7 @@ export interface Treino {
   updated_at: string
 }
 
-export interface Avaliacoes {
+export interface Avaliacao {
   id: string
   vencimento: string
   objetivo: string
@@ -138,6 +138,8 @@ export interface Receita {
 
 export interface ReceitaResponse extends PaginatedResponse<Receita> {}
 
+export interface AvaliacaoResponse extends PaginatedResponse<Avaliacao> {}
+
 export interface IUserData {
   id: string
   nome: string
@@ -147,7 +149,19 @@ export interface IUserData {
   cidade: string
   notas: string
   contato: string
-  avaliacoes: Avaliacoes[]
+  avaliacoes: Avaliacao[]
   receitas: Receita[]
   data_nascimento: string
+}
+
+export interface WhoAmI {
+  id: string
+  nome: string
+  email: string
+  roles: string[]
+  status: string
+  is_enabled: boolean
+  is_account_non_expired: boolean
+  created_at: string
+  updated_at: string
 }

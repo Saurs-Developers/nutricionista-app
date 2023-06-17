@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft } from "phosphor-react"
 
-import { Exercicio, Treino } from "@/@types/user"
+import { Treino } from "@/@types/user"
 import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
@@ -74,7 +74,7 @@ export function Workout() {
           })
         ) : (
           <Typography type="body" variant="md">
-            Nenhuma exercício foi encontrada.
+            Nenhuma exercício foi encontrado.
           </Typography>
         )}
       </div>

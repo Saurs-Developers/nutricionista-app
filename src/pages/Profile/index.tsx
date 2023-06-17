@@ -1,17 +1,19 @@
 import { FilePdf } from "phosphor-react"
 
-import { IUserData } from "@/@types/user"
 import { Button } from "@/components/Button"
+import { Fallback } from "@/components/Fallback"
 import { Select } from "@/components/Select"
 import { Typography } from "@/components/Typography"
-import { useUserData } from "@/hooks/useUserData"
+import { useProfileInfo } from "@/hooks/useProfileInfo"
 import { calculateAge } from "@/utils/calculateAge"
 import { dateFormatter } from "@/utils/dateFormatter"
 
 export function Profile() {
-  const { data } = useUserData()
+  const { isLoading, client, avaliacoes } = useProfileInfo()
 
-  const { nome, avaliacoes, data_nascimento } = data as IUserData
+  if (isLoading) {
+    return <Fallback />
+  }
 
   const ultimaAvaliacao = avaliacoes[0]
 
@@ -44,14 +46,14 @@ export function Profile() {
               variant="xxs"
               type="heading"
             >
-              {nome}
+              {client!.nome}
             </Typography>
             <Typography
               className="text-neutral-600"
               variant="xxs"
               type="heading"
             >
-              {calculateAge(data_nascimento)} anos
+              {calculateAge(client!.data_nascimento)} anos
               {ultimaAvaliacao &&
                 `, ${ultimaAvaliacao?.peso}kg, ${ultimaAvaliacao.altura}m`}
             </Typography>

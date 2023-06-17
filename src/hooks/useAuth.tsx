@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import jwt_decode from "jwt-decode"
 
@@ -17,6 +18,8 @@ export const useAuth = () => {
   const access_token = localStorage.getItem("access-token")
   const refresh_token = localStorage.getItem("refresh-token")
 
+  const navigate = useNavigate()
+
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     if (refresh_token) {
       return true
@@ -34,11 +37,11 @@ export const useAuth = () => {
     return {} as IJwt
   })
 
-  // Login logic
   const {
     mutate: login,
     isError: loginError,
     isLoading: loginLoading,
+    isSuccess,
   } = useMutation({
     mutationFn: async (data: LoginBody) => {
       const res = await api.post("/v1/auth/login", data)
@@ -52,6 +55,7 @@ export const useAuth = () => {
       localStorage.setItem("access-token", data.token)
       localStorage.setItem("refresh-token", data.refresh_token)
       setIsLoggedIn(true)
+      window.location.reload()
     },
   })
 
@@ -60,5 +64,13 @@ export const useAuth = () => {
     localStorage.removeItem("access-token")
   }
 
-  return { isLoggedIn, logout, userInfo, login, loginError, loginLoading }
+  return {
+    isLoggedIn,
+    logout,
+    userInfo,
+    login,
+    loginError,
+    loginLoading,
+    isSuccess,
+  }
 }

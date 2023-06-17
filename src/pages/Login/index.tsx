@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -12,6 +13,7 @@ import { loginSchema } from "@/schemas/login"
 type LoginProps = z.infer<typeof loginSchema>
 
 export function Login() {
+  const { isLoggedIn } = useAuth()
   const { loginError, loginLoading, login } = useAuth()
 
   const {
@@ -30,6 +32,10 @@ export function Login() {
       console.log(e)
     }
   }
+
+  useEffect(() => {
+    console.log(isLoggedIn)
+  })
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
