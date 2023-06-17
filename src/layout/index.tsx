@@ -7,7 +7,7 @@ import { Typography } from "../components/Typography"
 export function Layout() {
   return (
     <div className="flex flex-col h-screen">
-      <main className="max-h-full overflow-auto flex-1 px-4 py-8">
+      <main className="max-h-full overflow-auto flex-1 px-3 py-8">
         <Outlet />
       </main>
       <footer className="border-t-2 border-brand-primary">

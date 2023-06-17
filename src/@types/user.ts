@@ -107,6 +107,7 @@ export interface Avaliacao {
   peso: number
   altura: number
   torax: number
+  consumo_ideal_agua: number
   cintura: number
   abdomen: number
   quadril: number

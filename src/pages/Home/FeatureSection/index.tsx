@@ -71,7 +71,6 @@ export function FeatureSection({ data }: { data: Avaliacao }) {
               Criação da dieta em andamento...🏗️
             </Typography>
           )}
-          {data && data.dietas.length > 0 && <DietCard data={data} />}
         </div>
       </>
     )
