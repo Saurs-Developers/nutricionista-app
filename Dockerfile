@@ -6,6 +6,8 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
 
+ENV VITE_BASE_URL="https://nutricionista-api-dev.up.railway.app/api"
+
 RUN pnpm install
 
 COPY . .
