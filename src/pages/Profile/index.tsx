@@ -89,8 +89,7 @@ export function Profile() {
             type="body"
             variant="md"
           >
-            Fim do acompanhamento atual:{" "}
-            {dateFormatter(ultimaAvaliacao.vencimento)}
+            Fim do acompanhamento : {dateFormatter(ultimaAvaliacao.vencimento)}
           </Typography>
         )}
       </div>
