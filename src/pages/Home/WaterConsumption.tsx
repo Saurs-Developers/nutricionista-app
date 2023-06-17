@@ -25,7 +25,7 @@ export function WaterConsumption({ data }: { data: Avaliacao }) {
 
   const [open, setOpen] = useState(false)
 
-  const water_objective = data.consumo_ideal_agua
+  const water_objective = data?.consumo_ideal_agua
     ? data.consumo_ideal_agua
     : 2000
 

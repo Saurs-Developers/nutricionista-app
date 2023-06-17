@@ -75,4 +75,12 @@ export function FeatureSection({ data }: { data: Avaliacao }) {
       </>
     )
   }
+
+  return (
+    <div className="my-12">
+      <Typography type="body" variant="lg">
+        Avaliação em andamento... 🏗️
+      </Typography>
+    </div>
+  )
 }
