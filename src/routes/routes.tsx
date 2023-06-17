@@ -22,7 +22,7 @@ import { Layout } from "../layout/index"
 export function AppRoutes() {
   const { isLoggedIn } = useAuth()
 
-  const first_access = localStorage.getItem("first_access")
+  const first_access = localStorage.getItem("first-access-token")
 
   return (
     <Routes>
@@ -50,6 +50,7 @@ export function AppRoutes() {
       />
       <Route
         path="/"
+        errorElement={<Error />}
         element={isLoggedIn ? <Layout /> : <Navigate to="/login" />}
       >
         <Route path="/" element={<Home />} />

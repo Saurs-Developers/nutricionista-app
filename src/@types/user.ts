@@ -92,12 +92,18 @@ export interface Treino {
   updated_at: string
 }
 
+export enum PlanoEnum {
+  BASIC = "BASIC",
+  PRO = "PRO",
+  ULTIMATE = "ULTIMATE",
+}
+
 export interface Avaliacao {
   id: string
   vencimento: string
   objetivo: string
   fotos?: any
-  plano: string
+  plano: PlanoEnum
   peso: number
   altura: number
   torax: number
