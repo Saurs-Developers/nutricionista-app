@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom"
 import axios from "axios"
 
-export const baseURL = import.meta.env.VITE_BASE_URL
+export const baseURL = "https://nutricionista-api-dev.up.railway.app/api"
 
 export const api = axios.create({
   baseURL: baseURL,
