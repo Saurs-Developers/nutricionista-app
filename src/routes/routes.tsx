@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 
 import { useAuth } from "@/hooks/useAuth"
 import { NotFound } from "@/pages/404"
+import { ApplicationError } from "@/pages/ApplicationError/ApplicationError"
 import { Chat } from "@/pages/Chat"
 import { Diet } from "@/pages/Diet"
 import { Error } from "@/pages/Error"
@@ -61,6 +62,7 @@ export function AppRoutes() {
         <Route path="diet/:id" element={<Diet />} />
         <Route path="question" element={<Question />} />
         <Route path="recipes" element={<Recipes />} />
+        <Route path="application-error" element={<ApplicationError />} />
       </Route>
     </Routes>
   )

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "phosphor-react"
 import * as z from "zod"
@@ -13,7 +13,7 @@ import { chatSchema } from "@/schemas/chat"
 
 import "@hookform/resolvers/zod"
 
-export function Chat() {
+export function ApplicationError() {
   const navigate = useNavigate()
 
   const [isSendingMessage, setIsSendingMessage] = useState(false)
@@ -25,14 +25,10 @@ export function Chat() {
   })
 
   const onSubmit = async (data: ChatBody) => {
-    const message =
-      "Olá, me chamo " +
-      data.name +
-      " e gostaria de relatar o erro " +
-      data.message
+    const message = "Olá, me chamo " + data.name + " e " + data.message
 
     const params = new URLSearchParams({
-      phone: "5569996003366",
+      phone: "5568992361680",
       text: message,
       type: "phone_number",
       app_absent: "0",
@@ -49,30 +45,31 @@ export function Chat() {
   return (
     <div>
       <header className="flex items-center gap-4">
-        <Typography as="h2" className="mb-6" type="heading" variant="xs">
-          Chat
+        <button onClick={() => navigate("/chat")}>
+          <ArrowLeft size={24} className="text-brand-primary" />
+        </button>
+        <Typography as="h2" type="heading" variant="xs">
+          Voltar
         </Typography>
       </header>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <Typography as="h2" className="mt-6" type="heading" variant="xs">
+          Relatar erro
+        </Typography>
         <Typography as="h2" type="body" variant="md">
-          Você será redirecionado ao Whatsapp, onde poderá tirar dúvidas
-          diretamente sobre o assunto desejado.
+          Caso tenha avistado algum erro na aplicação, por favor, descreva de
+          forma detalhada o erro encontrado. Agradeçemos a compreensão.
         </Typography>
         <Input {...register("name")} label="Nome" placeholder="Ex: João" />
         <TextArea
           {...register("message")}
-          placeholder="Ex: Gostaria de reduzir os ovos na dieta..."
           label="Mensagem"
+          placeholder="Ex: tela de erro ao realizar tal ação..."
         />
         <Button type="submit" variant={isSendingMessage ? "loading" : "filled"}>
           Enviar
         </Button>
       </form>
-      <Link to="/application-error">
-        <Button className="mt-4" type="submit" variant="danger-outlined">
-          Relatar erro
-        </Button>
-      </Link>
     </div>
   )
 }
