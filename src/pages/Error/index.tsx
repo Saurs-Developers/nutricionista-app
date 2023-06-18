@@ -19,7 +19,7 @@ export function Error() {
 
   return (
     <div className="px-[1rem] py-[2rem] h-screen w-screen flex flex-col items-center justify-center">
-      <img src="/logo.png" className="mb-4" alt="" />
+      <img src="/logo.svg" className="mb-4" alt="" />
       <Typography className="text-center text-danger" type="body" variant="xl">
         Um Erro foi encontrado.
       </Typography>

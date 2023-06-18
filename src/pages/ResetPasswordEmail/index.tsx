@@ -65,7 +65,7 @@ export function ResetPasswordEmail() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-32 flex-1 flex flex-col gap-4 items-center"
       >
-        <img className="mb-8" src="/logo.png" alt="" />
+        <img className="mb-8" src="/logo.svg" alt="" />
         {isEmailSent ? (
           <>
             <Typography className="self-start" as="p" variant="lg" type="body">

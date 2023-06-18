@@ -13,9 +13,6 @@ export function ResetPasswordFallback() {
   const status = params.get("status")
 
   useEffect(() => {
-    console.log(status)
-    console.log(origin)
-
     setTimeout(() => {
       if (status !== "success") {
         switch (reason) {

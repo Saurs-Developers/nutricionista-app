@@ -30,11 +30,13 @@ export function Diet() {
 
   return (
     <div>
-      <header className="flex items-center gap-4">
-        <button onClick={() => navigate("/")}>
+      <header className="flex items-center gap-4 mb-6">
+        <button onClick={() => navigate(-1)}>
           <ArrowLeft size={24} className="text-brand-primary" />
         </button>
-        <Input placeholder="Pesquisar" searchIcon />
+        <Typography as="h2" type="heading" variant="xs">
+          Voltar
+        </Typography>
       </header>
       <Typography as="h2" className="my-6" type="heading" variant="xs">
         {!isLoading && dieta!.titulo}

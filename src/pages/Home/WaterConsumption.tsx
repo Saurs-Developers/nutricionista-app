@@ -29,8 +29,6 @@ export function WaterConsumption({ data }: { data: Avaliacao }) {
     ? data.consumo_ideal_agua
     : 2000
 
-  console.log(water_objective / 30)
-
   const objectiveSuccess = water_objective - currentAmount <= 0
 
   return (

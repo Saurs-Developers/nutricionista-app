@@ -29,13 +29,9 @@ export function Login() {
     try {
       login(formData)
     } catch (e) {
-      console.log(e)
+      // console.log(e)
     }
   }
-
-  useEffect(() => {
-    console.log(isLoggedIn)
-  })
 
   return (
     <div className="flex flex-col w-screen h-screen py-8 px-6">
@@ -46,7 +42,7 @@ export function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-32 flex-1 flex flex-col gap-4 items-center"
       >
-        <img className="mb-8" src="/logo.png" alt="" />
+        <img className="mb-8" src="/logo.svg" alt="" />
         <Input
           label="Email"
           {...register("email")}

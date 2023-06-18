@@ -60,39 +60,50 @@ export function Profile() {
           </div>
         </section>
       </div>
-      <div className="my-6 space-y-4">
-        <Typography className="text-neutral-700" type="body" variant="xl">
-          Avaliação antropométrica
+      {ultimaAvaliacao ? (
+        <div className="my-6 space-y-4">
+          <Typography className="text-neutral-700" type="body" variant="xl">
+            Avaliação antropométrica
+          </Typography>
+          {ultimaAvaliacao.objetivo && (
+            <Typography
+              className="text-neutral-700"
+              variant="xxs"
+              type="heading"
+            >
+              Objetivo: Ganhar massa e perder gordura
+            </Typography>
+          )}
+          <Select
+            options={avaliacoes.map((avaliacao, i) => {
+              return (
+                <option key={i}>
+                  {dateFormatter(avaliacao.created_at)} -{" "}
+                  {dateFormatter(avaliacao.vencimento)}
+                </option>
+              )
+            })}
+            label="Período"
+          />
+          <Button variant="filled">
+            Exportar em PDF <FilePdf size={24} />
+          </Button>
+          {ultimaAvaliacao.vencimento && (
+            <Typography
+              className="text-neutral-600 mt-6"
+              type="body"
+              variant="md"
+            >
+              Fim do acompanhamento :{" "}
+              {dateFormatter(ultimaAvaliacao.vencimento)}
+            </Typography>
+          )}
+        </div>
+      ) : (
+        <Typography className="mt-6" variant="md" type="body">
+          Avaliação em andamento... 🏗️
         </Typography>
-        {ultimaAvaliacao.objetivo && (
-          <Typography className="text-neutral-700" variant="xxs" type="heading">
-            Objetivo: Ganhar massa e perder gordura
-          </Typography>
-        )}
-        <Select
-          options={avaliacoes.map((avaliacao, i) => {
-            return (
-              <option key={i}>
-                {dateFormatter(avaliacao.created_at)} -{" "}
-                {dateFormatter(avaliacao.vencimento)}
-              </option>
-            )
-          })}
-          label="Período"
-        />
-        <Button variant="filled">
-          Exportar em PDF <FilePdf size={24} />
-        </Button>
-        {ultimaAvaliacao.vencimento && (
-          <Typography
-            className="text-neutral-600 mt-6"
-            type="body"
-            variant="md"
-          >
-            Fim do acompanhamento : {dateFormatter(ultimaAvaliacao.vencimento)}
-          </Typography>
-        )}
-      </div>
+      )}
     </div>
   )
 }

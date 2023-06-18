@@ -27,11 +27,10 @@ export function FirstAccess() {
   const { isLoading, isError, isSuccess, mutate: reset } = useUserFirstAccess()
 
   const onSubmit = async (formData: FirstAccessProps) => {
-    console.log(formData)
     try {
       reset({ password: formData.password })
     } catch (e) {
-      console.log(e)
+      // console.log(e)
     }
   }
 
@@ -57,7 +56,7 @@ export function FirstAccess() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-32 flex-1 flex flex-col gap-4 items-center"
       >
-        <img className="mb-8" src="/logo.png" alt="" />
+        <img className="mb-8" src="/logo.svg" alt="" />
         <Typography as="h2" variant="lg" type="body">
           Bem vindo! Para começar, crie uma nova senha.
         </Typography>
