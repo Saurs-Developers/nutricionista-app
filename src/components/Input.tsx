@@ -17,13 +17,13 @@ export const Input = forwardRef<InputRef, InputProps>(
       <div className="font-nunito w-full">
         {label && (
           <label
-            className="font-bold text-[0.875rem] text-neutral-600 mb-2"
+            className="font-bold text-[0.875rem] text-neutral-600"
             htmlFor={id}
           >
             {label}
           </label>
         )}
-        <div className="flex items-center justify-between gap-2 border-2 h-12 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
+        <div className="flex items-center justify-between gap-2 border-2 h-12 mt-1 px-4 rounded-md border-neutral-400 focus-within:border-brand-primary transition">
           <input
             {...props}
             id={id}

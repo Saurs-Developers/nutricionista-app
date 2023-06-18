@@ -13,7 +13,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
       <div className="font-nunito w-full">
         {label && (
           <label
-            className="font-bold text-[0.875rem] text-neutral-600 mb-2"
+            className="font-bold text-[0.875rem] text-neutral-600"
             htmlFor={id}
           >
             {label}
@@ -24,7 +24,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
           id={id}
           ref={ref}
           placeholder={placeholder}
-          className="w-full border-2 h-12 p-2 outline-none text-sm rounded-md border-neutral-400 focus-within:border-brand-primary transition min-h-[8rem] resize-none"
+          className="w-full border-2 h-12 p-2 outline-none mt-1 text-sm rounded-md border-neutral-400 focus-within:border-brand-primary transition min-h-[8rem] resize-none"
         />
         {error && <span className="mt-2 text-red-500">{error}</span>}
       </div>
