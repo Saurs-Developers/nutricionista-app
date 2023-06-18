@@ -27,7 +27,7 @@ export function WorkoutCard({ data }: { data: Avaliacao }) {
                       </Card.Subtitle>
                     </>
                   }
-                  image={<Card.Image src={`workouts/${key + 1}.jpg`} />}
+                  image={<Card.Image src={`workouts/${key + 1}.png`} />}
                 />
               </Link>
             </div>
