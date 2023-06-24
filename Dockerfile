@@ -6,7 +6,7 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
 
-ENV VITE_BASE_URL="https://nutricionista-api-dev.up.railway.app/api"
+ENV VITE_BASE_URL=$VITE_BASE_URL
 
 RUN pnpm install
 
@@ -18,5 +18,4 @@ RUN npm install -g serve
 
 EXPOSE 5173
 
-# Set the command to start the app using Serve and reference the PORT environment variable
 CMD serve dist -s -n -L -p 5173

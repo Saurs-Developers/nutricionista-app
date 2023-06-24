@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -13,7 +12,6 @@ import { loginSchema } from "@/schemas/login"
 type LoginProps = z.infer<typeof loginSchema>
 
 export function Login() {
-  const { isLoggedIn } = useAuth()
   const { loginError, loginLoading, login } = useAuth()
 
   const {
@@ -29,7 +27,7 @@ export function Login() {
     try {
       login(formData)
     } catch (e) {
-      // console.log(e)
+      console.log(e)
     }
   }
 
