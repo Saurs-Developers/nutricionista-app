@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { Navigate, redirect, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
@@ -30,20 +30,20 @@ export function FirstAccess() {
     try {
       reset({ password: formData.password })
     } catch (e) {
-      // console.log(e)
+      console.log(e)
     }
   }
 
   useEffect(() => {
     if (isSuccess) {
       navigate("/login")
-      localStorage.removeItem("first-access-token")
+      localStorage.removeItem("first_access_token")
     } else if (isError) {
-      // localStorage.removeItem("first-access-token")
+      localStorage.removeItem("first_access_token")
     }
   }, [isSuccess, isError])
 
-  if (!localStorage.getItem("first-access-token")) {
+  if (!localStorage.getItem("first_access_token")) {
     return <Navigate to="/login" />
   }
 
@@ -74,7 +74,10 @@ export function FirstAccess() {
           error={errors.password_confirmation?.message as string}
           placeholder="********"
         />
-        <Button disabled={isLoading} variant="filled">
+        <Button
+          disabled={isLoading}
+          variant={!isLoading ? "filled" : "loading"}
+        >
           Alterar senha
         </Button>
         {isError && (

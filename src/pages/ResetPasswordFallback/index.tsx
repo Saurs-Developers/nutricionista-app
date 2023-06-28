@@ -31,11 +31,11 @@ export function ResetPasswordFallback() {
       } else {
         switch (origin) {
           case "FORGOT_PASSWORD":
-            localStorage.setItem("forgot-password-token", token!)
+            localStorage.setItem("forgot_password_token", token!)
             navigate(`/reset-password`)
             break
           case "FIRST_ACCESS":
-            localStorage.setItem("first-access-token", token!)
+            localStorage.setItem("first_access_token", token!)
             navigate(`/first-access`)
             break
           default:

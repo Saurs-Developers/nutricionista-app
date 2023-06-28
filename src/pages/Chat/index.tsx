@@ -25,11 +25,7 @@ export function Chat() {
   })
 
   const onSubmit = async (data: ChatBody) => {
-    const message =
-      "Olá, me chamo " +
-      data.name +
-      " e gostaria de relatar o erro " +
-      data.message
+    const message = "Olá, me chamo " + data.name + " e " + data.message
 
     const params = new URLSearchParams({
       phone: "5569996003366",

@@ -23,7 +23,7 @@ import { Layout } from "../layout/index"
 export function AppRoutes() {
   const { isLoggedIn } = useAuth()
 
-  const first_access = localStorage.getItem("first-access-token")
+  const first_access = localStorage.getItem("first_access_token")
 
   return (
     <Routes>

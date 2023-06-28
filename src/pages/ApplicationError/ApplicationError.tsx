@@ -25,7 +25,11 @@ export function ApplicationError() {
   })
 
   const onSubmit = async (data: ChatBody) => {
-    const message = "Olá, me chamo " + data.name + " e " + data.message
+    const message =
+      "Olá, me chamo " +
+      data.name +
+      " e gostaria de relatar o erro " +
+      data.message
 
     const params = new URLSearchParams({
       phone: "5568992361680",
