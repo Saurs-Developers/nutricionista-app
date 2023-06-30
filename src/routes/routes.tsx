@@ -51,7 +51,7 @@ export function AppRoutes() {
       />
       <Route
         path="/"
-        errorElement={<Error />}
+        // errorElement={<Error />}
         element={isLoggedIn ? <Layout /> : <Navigate to="/login" />}
       >
         <Route path="/" element={<Home />} />

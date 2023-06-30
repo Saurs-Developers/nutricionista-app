@@ -26,13 +26,15 @@ export const useWaterConsumption = () => {
       )
     }
 
-    if (waterConsumption && waterConsumption.date < new Date().getDate()) {
+    if (waterConsumption && waterConsumption.date > new Date().getDate()) {
       localStorage.setItem(
         "waterConsumption",
         JSON.stringify({ amount: 0, date: new Date().getDate() }),
       )
       setCurrentAmount(0)
     }
+
+    console.log("ping")
   }, [waterConsumption])
 
   const addWater = (amount: number) => {
