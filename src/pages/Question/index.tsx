@@ -1,32 +1,41 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { ArrowLeft } from "phosphor-react"
 
 import { Typography } from "@/components/Typography"
+import { questions } from "@/utils/faq"
 
 export function Question() {
   const navigate = useNavigate()
+  const { id } = useParams()
+
+  const question = questions.find((question) => question.id === id)
 
   return (
     <div>
-      <header className="flex items-center gap-4">
-        <button onClick={() => navigate("/faq")}>
-          <ArrowLeft size={24} className="text-brand-primary" />
-        </button>
+      <button onClick={() => navigate("/faq")}>
+        <ArrowLeft size={24} className="text-brand-primary" />
+      </button>
+      <header className="mt-4">
         <Typography
           as="h2"
           className="text-neutral-700"
           variant="xs"
           type="heading"
         >
-          Pode Beber?
+          {question?.title}
         </Typography>
       </header>
       <Typography className="my-7" type="body" variant="md">
-        Com moderação e de preferencia aos finais de semana, o álcool não terá
-        um impacto significativo em sua performance. Lembre-se, o ideal é não
-        ingerir bebidas alcoólicas, mas uma cevejinha no final de semana tá
-        liberado!
+        {question?.answer}
       </Typography>
+      {question?.link && (
+        <Typography className="my-7" type="body" variant="md">
+          Acesse:{" "}
+          <a className="text-blue-700 underline" href={question?.link}>
+            {question?.link}
+          </a>
+        </Typography>
+      )}
     </div>
   )
 }

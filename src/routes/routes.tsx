@@ -60,7 +60,7 @@ export function AppRoutes() {
         <Route path="faq" element={<Faq />} />
         <Route path="workout/:id" element={<Workout />} />
         <Route path="diet/:id" element={<Diet />} />
-        <Route path="question" element={<Question />} />
+        <Route path="question/:id" element={<Question />} />
         <Route path="recipes" element={<Recipes />} />
         <Route path="application-error" element={<ApplicationError />} />
       </Route>

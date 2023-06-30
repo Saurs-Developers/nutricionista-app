@@ -2,14 +2,7 @@ import { Link } from "react-router-dom"
 import { ArrowRight } from "phosphor-react"
 
 import { Typography } from "@/components/Typography"
-
-const questions = [
-  "Pode beber?",
-  "Preciso passar fome?",
-  "Posso pedir para ajustar a dieta?",
-  "Posso pedir para ajustar o treino?",
-  "Posso comer o que eu quiser?",
-]
+import { questions } from "@/utils/faq"
 
 export function Faq() {
   return (
@@ -32,9 +25,9 @@ export function Faq() {
               className="shadow-sm border-2 rounded-lg flex items-center justify-between py-3 px-4"
             >
               <Typography className="text-neutral-700" type="body" variant="sm">
-                {question}
+                {question.title}
               </Typography>
-              <Link to="/question">
+              <Link to={"/question/" + question.id}>
                 <ArrowRight className="text-brand-primary" size={24} />
               </Link>
             </div>
