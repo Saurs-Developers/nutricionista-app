@@ -25,6 +25,7 @@ export function CreateRecipeAlert() {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isValid },
   } = useForm<RecipeBody>({
     resolver: zodResolver(recipeSchema),
@@ -46,6 +47,7 @@ export function CreateRecipeAlert() {
   const onSubmit = (data: RecipeBody) => {
     mutate(data)
     setOpen(false)
+    reset()
   }
 
   return (

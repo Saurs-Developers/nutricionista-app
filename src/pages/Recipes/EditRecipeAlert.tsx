@@ -32,7 +32,8 @@ export function EditRecipeAlert({
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    reset,
+    formState: { errors },
   } = useForm<RecipeBody>({
     defaultValues: {
       titulo: title,
@@ -55,6 +56,7 @@ export function EditRecipeAlert({
   const onSubmit = (data: RecipeBody) => {
     mutate(data)
     setOpen(false)
+    reset()
   }
 
   return (
