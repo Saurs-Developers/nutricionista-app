@@ -87,6 +87,7 @@ export interface Treino {
   titulo: string
   foco: string
   dias: string[]
+  observacao: string
   exercicios: any[]
   created_at: string
   updated_at: string

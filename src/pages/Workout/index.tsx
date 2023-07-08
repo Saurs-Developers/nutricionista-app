@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft } from "phosphor-react"
 
@@ -7,7 +7,6 @@ import { apiPrivate } from "@/api/api"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card/Card"
 import { LazyLoading } from "@/components/Card/LazyLoading"
-import { Input } from "@/components/Input"
 import { Typography } from "@/components/Typography"
 
 export function Workout() {
@@ -37,6 +36,12 @@ export function Workout() {
       <Typography as="h2" className="my-6" type="heading" variant="xs">
         {treino?.titulo}
       </Typography>
+      <Typography as="p" className="my-6" type="body" variant="md">
+        Observação: {treino?.observacao}
+      </Typography>
+      <Link to={"/"}>
+        <Button variant="filled">Seção de mobilidade</Button>
+      </Link>
       <div className="flex flex-col gap-6 mt-8">
         {isLoading ? (
           <div className="flex flex-col gap-4">
@@ -49,16 +54,24 @@ export function Workout() {
             return (
               <Card
                 key={key}
-                image={<Card.Image src="http://placekitten.com/340/340" />}
                 info={
                   <>
-                    <Card.Title>
-                      {exercicio.atividade.titulo} - {exercicio.carga}kg
-                    </Card.Title>
+                    <Card.Title>{exercicio.atividade.titulo}</Card.Title>
                     <Card.Subtitle>
                       {exercicio.series} séries de {exercicio.repeticoes}{" "}
                       repetições
                     </Card.Subtitle>
+                    <div className="aspect-video">
+                      <iframe
+                        src="https://www.youtube.com/embed/rjCxBrK_znI"
+                        width="100%"
+                        className="rounded-lg"
+                        height="100%"
+                        title="Elevação lateral unilateral"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
+                        allowFullScreen
+                      />
+                    </div>
                     <Card.Description>{exercicio.observacao}</Card.Description>
                     <Card.Description>
                       {exercicio.tempo_descanso}s de descanso
